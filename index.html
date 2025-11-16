@@ -20,7 +20,8 @@
       padding: 15px 25px;
       display: flex;
       justify-content: center;
-      gap: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
       border-bottom: 1px solid #ffd1d1;
     }
     nav a {
@@ -29,27 +30,34 @@
       text-decoration: none;
       font-size: 1rem;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
+    nav a:hover { text-decoration: underline; }
 
     /* ---------- HEADER ---------- */
     header { 
       background: linear-gradient(120deg, #ff9a9e, #fad0c4); 
       text-align: center; 
-      padding: 60px 20px; 
+      padding: 40px 20px; 
       border-bottom-left-radius: 50px; 
       border-bottom-right-radius: 50px; 
       margin-top: 10px;
     }
-    header h1 { font-size: 3rem; color: #fff; }
-    header p { font-size: 1.2rem; color: #fff; margin-top: 10px; }
+    header h1 { 
+      font-size: clamp(1.8rem, 6vw, 3rem); /* fluid font for mobile to desktop */
+      color: #fff; 
+      line-height: 1.2;
+      word-break: break-word; 
+    }
+    header p { 
+      font-size: clamp(0.9rem, 3vw, 1.2rem); 
+      color: #fff; 
+      margin-top: 10px; 
+      line-height: 1.4;
+    }
 
     /* ---------- SECTIONS ---------- */
-    section { max-width: 1000px; margin: 60px auto; padding: 0 20px; }
-    h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
-
-    h3 { font-size: 1.4rem; color: #ff8c94; margin-bottom: 10px; }
+    section { max-width: 1000px; margin: 50px auto; padding: 0 15px; }
+    h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
+    h3 { font-size: clamp(1.1rem, 3vw, 1.4rem); color: #ff8c94; margin-bottom: 10px; }
     p { margin-bottom: 15px; }
 
     .project, .skill, .activity {
@@ -74,7 +82,7 @@
       border-top-left-radius: 50px; 
       border-top-right-radius: 50px; 
       color: #fff; 
-      margin-top: 70px; 
+      margin-top: 50px; 
     }
 
     /* ---------- BACK TO TOP BUTTON ---------- */
@@ -94,8 +102,13 @@
       transition: 0.3s ease;
       z-index: 999;
     }
-    #topBtn:hover {
-      background: #e65a51;
+    #topBtn:hover { background: #e65a51; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 600px) {
+      nav { gap: 8px; padding: 10px; }
+      section { padding: 0 10px; margin: 40px auto; }
+      .project, .skill, .activity { padding: 15px; }
     }
   </style>
 </head>
@@ -127,7 +140,7 @@
   <section id="academic">
     <h2>Academic Journey</h2>
     <p>My academic journey has always been shaped by curiosity, consistency and a genuine love for learning. Throughout school, I’ve been known as the student who asks one more question, solves one more problem and dives a little deeper than expected.</p>
-    <p>I was consistently among the top 5 students in my school, finishing Class 10 with a CGGA of 9.38 . Entering Class 11, I continued the same momentum—achieving academic excellence again, becoming one of the top scorers in Chemistry and once more securing a place in the top 5.</p>
+    <p>I was consistently among the top 5 students in my school, finishing Class 10 with a CGGA of 9.38. Entering Class 11, I continued the same momentum—achieving academic excellence again, becoming one of the top scorers in Chemistry and once more securing a place in the top 5.</p>
     <p>Alongside chemistry, I’ve spent the last four years preparing for JEE, which has strengthened my discipline, focus and resilience. Beyond academics, I’ve always been a bright, reflective pupil, someone who loves philosophical conversations, meaningful books and deep thinking. I journal regularly, using it as a way to process ideas, track growth and understand myself better.</p>
   </section>
 
@@ -283,3 +296,4 @@
 
 </body>
 </html>
+
