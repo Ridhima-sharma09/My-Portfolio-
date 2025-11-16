@@ -5,152 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ridhima Sharma • Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-    body { background: #fff8f0; color: #222; line-height: 1.6; scroll-behavior: smooth; }
-
-    /* ---------- NAVBAR ---------- */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: #ffffffcc;
-      backdrop-filter: blur(10px);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      border-bottom: 1px solid #ffd1d1;
-    }
-    nav a {
-      color: #ff6f61;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    /* ---------- HEADER ---------- */
-    header { 
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4); 
-      text-align: center; 
-      padding: 40px 20px; 
-      border-bottom-left-radius: 50px; 
-      border-bottom-right-radius: 50px; 
-      margin-top: 10px;
-    }
-    header h1 { 
-      font-size: clamp(1.8rem, 6vw, 3rem); /* fluid font for mobile to desktop */
-      color: #fff; 
-      line-height: 1.2;
-      word-break: break-word; 
-    }
-    header p { 
-      font-size: clamp(0.9rem, 3vw, 1.2rem); 
-      color: #fff; 
-      margin-top: 10px; 
-      line-height: 1.4;
-    }
-
-    /* ---------- SECTIONS ---------- */
-    section { max-width: 1000px; margin: 50px auto; padding: 0 15px; }
-    h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
-    h3 { font-size: clamp(1.1rem, 3vw, 1.4rem); color: #ff8c94; margin-bottom: 10px; }
+    body { background: #fff8f0; color: #222; line-height: 1.6; }
+    header { background: linear-gradient(120deg, #ff9a9e, #fad0c4); text-align: center; padding: 60px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
+    header h1 { font-size: 3rem; color: #fff; }
+    header p { font-size: 1.2rem; color: #fff; margin-top: 10px; }
+    section { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+    h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
+    h3 { font-size: 1.4rem; color: #ff8c94; margin-bottom: 10px; }
     p { margin-bottom: 15px; }
-
-    .project, .skill, .activity {
-      background: #fff3f0;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 20px 0;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
-
+    .project, .skill, .activity { background: #fff3f0; border-radius: 15px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
     a { color: #ff6f61; text-decoration: none; font-weight: 600; }
     a:hover { text-decoration: underline; }
-
     ul { margin-left: 20px; margin-bottom: 15px; }
     li { margin-bottom: 8px; }
-
-    /* ---------- FOOTER ---------- */
-    footer { 
-      text-align: center; 
-      padding: 40px 20px; 
-      background: #ff9a9e; 
-      border-top-left-radius: 50px; 
-      border-top-right-radius: 50px; 
-      color: #fff; 
-      margin-top: 50px; 
-    }
-
-    /* ---------- BACK TO TOP BUTTON ---------- */
-    #topBtn {
-      display: none;
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #ff6f61;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: 0.3s ease;
-      z-index: 999;
-    }
-    #topBtn:hover { background: #e65a51; }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 600px) {
-      nav { gap: 8px; padding: 10px; }
-      section { padding: 0 10px; margin: 40px auto; }
-      .project, .skill, .activity { padding: 15px; }
-    }
+    footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top-left-radius: 50px; border-top-right-radius: 50px; color: #fff; margin-top: 50px; }
+    .emoji { font-size: 1.2rem; margin-right: 5px; }
   </style>
 </head>
-
 <body>
-
-  <!-- NAVBAR -->
-  <nav>
-    <a href="#intro">Introduction</a>
-    <a href="#academic">Academics</a>
-    <a href="#spark">Interest</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#activities">Activities</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
   <header>
     <h1>Ridhima Sharma</h1>
     <p>• Student • Developer • Realism art enthusiast • JEE Aspirant</p>
   </header>
 
-  <section id="intro">
+  <section>
     <h2>Introduction</h2>
     <p>Hi, I’m Ridhima Sharma, a 16-year-old student, developer and I’ve always been unapologetically curious about everything around me. I’m also passionate about philosophical books and collecting thought-provoking quotes and I love to draw realistic portraits as a hobby. I’ve been preparing for JEE for the past four years and that journey has shaped the way I think—structured, analytical, and driven by the need to understand things deeply rather than just accept them.</p>
     <p>I have a deep love for chemistry. I enjoy the logic behind reactions, the patterns hidden inside concepts and the way it connects the microscopic world to real life. It’s one of the few subjects that feels like both science and art to me.</p>
   </section>
 
-  <section id="academic">
+  <section>
     <h2>Academic Journey</h2>
     <p>My academic journey has always been shaped by curiosity, consistency and a genuine love for learning. Throughout school, I’ve been known as the student who asks one more question, solves one more problem and dives a little deeper than expected.</p>
-    <p>I was consistently among the top 5 students in my school, finishing Class 10 with a CGGA of 9.38. Entering Class 11, I continued the same momentum—achieving academic excellence again, becoming one of the top scorers in Chemistry and once more securing a place in the top 5.</p>
+    <p>I was consistently among the top 5 students in my school, finishing Class 10 with a CGPA of 9.38 . Entering Class 11, I continued the same momentum—achieving academic excellence again, becoming one of the top scorers in Chemistry and once more securing a place in the top 5.</p>
     <p>Alongside chemistry, I’ve spent the last four years preparing for JEE, which has strengthened my discipline, focus and resilience. Beyond academics, I’ve always been a bright, reflective pupil, someone who loves philosophical conversations, meaningful books and deep thinking. I journal regularly, using it as a way to process ideas, track growth and understand myself better.</p>
   </section>
 
-  <section id="spark">
+  <section>
     <h2>What Sparked My Interest</h2>
     <p>The foundations of my academic direction were set in 9th grade, when I participated in a school-level mathematics quiz competition and secured 2nd rank. It sparked a deep curiosity for advanced mathematics and computing, pushing me to explore ideas beyond the classroom.</p>
     <p>I became an active member of my school’s Science Club and Cyber Security Club, which exposed me to new concepts and perspectives. Through the Cyber Security Club, I attended my first webinar on cyber security, AI, and software development. These early experiences laid the roots of my academic journey and fuel the curiosity, passion, and dedication I bring into everything I learn and build.</p>
   </section>
 
-  <section id="projects">
+  <section>
     <h2>Projects</h2>
 
     <div class="project">
@@ -164,8 +64,7 @@
         <li>AI-ready for future personalized suggestions</li>
       </ul>
       <p>💻 <strong>Tech Stack:</strong> Python, Tkinter, GUI</p>
-      <p>🔗 <a href="https://github.com/Ridhima-sharma09/The-Last-Bookmark" target="_blank">GitHub Repository</a> |
-      <a href="https://www.linkedin.com/posts/ridhima-sharma-b3334b390_studentlife-learningjourney-innovation-activity-7395045963427536896-GU4N" target="_blank">LinkedIn Case Study</a></p>
+      <p>🔗 <a href="https://github.com/Ridhima-sharma09/The-Last-Bookmark" target="_blank">GitHub Repository</a> | <a href="https://www.linkedin.com/posts/ridhima-sharma-b3334b390_studentlife-learningjourney-innovation-activity-7395045963427536896-GU4N?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGAouJcBzzW5ee7uGMymUBIl_Dd3-tUmp8I" target="_blank">LinkedIn Case Study</a></p>
     </div>
 
     <div class="project">
@@ -196,7 +95,7 @@
     </div>
   </section>
 
-  <section id="skills">
+  <section>
     <h2>Skills & Expertise</h2>
 
     <div class="skill">
@@ -242,58 +141,40 @@
     </div>
   </section>
 
-  <section id="activities">
+  <section>
     <h2>Activities & Clubs</h2>
-
     <div class="activity">
       <h3>🔐 Cybersecurity Club</h3>
       <p>Attended workshops, webinars, and training sessions on ethical hacking, penetration testing basics, and defensive security. Cultivated problem-solving and critical thinking.</p>
     </div>
-
     <div class="activity">
       <h3>🧪 Science Club</h3>
       <p>Participated in exhibitions, model-making events, and small experiments. Built teamwork, research discipline, and structured problem-solving skills.</p>
     </div>
-
     <div class="activity">
       <h3>🎨 Madhubani Art</h3>
       <p>Created meaningful artwork that still hangs in school. Symbolizes patience, attention to detail, and preserving cultural expression.</p>
     </div>
-
     <div class="activity">
       <h3>💃🎶 Dance & Music Competitions</h3>
       <p>Participated in district & zonal competitions. Learned confidence, discipline, and self-expression through performing arts.</p>
     </div>
   </section>
 
-  <section id="contact">
+  <section>
     <h2>Social Media & Online Presence</h2>
-    <p>🔗 <a href="https://www.linkedin.com/in/ridhima-sharma-b3334b390/" target="_blank">LinkedIn</a> |
-    🐙 <a href="https://github.com/Ridhima-sharma09" target="_blank">GitHub</a></p>
+    <p>🔗 <a href="https://www.linkedin.com/in/ridhima-sharma-b3334b390/" target="_blank">LinkedIn</a> | 🐙 <a href="https://github.com/Ridhima-sharma09" target="_blank">GitHub</a></p>
+  </section>
 
+  <section>
     <h2>Contact</h2>
     <p>Email: <a href="mailto:ridhima7227@gmail.com">ridhima7227@gmail.com</a></p>
   </section>
 
   <footer>
-    I’m a 16-year-old student and developer with an insatiable curiosity about the world. When I’m not experimenting with chemistry or lost in philosophical books and quotes, you’ll probably find me sketching realistic portraits or overthinking life’s little mysteries. Powered by coffee, ideas, and occasional chaos, I like to keep learning, creating, and laughing along the way 🌿✨ Thank you for visiting! — Ridhima Sharma
+    I’m a 16-year-old student and developer with an insatiable curiosity about the world. When I’m not experimenting with chemistry or lost in philosophical books and quotes, you’ll probably find me sketching realistic portraits or overthinking life’s little mysteries. Powered by coffee, ideas, and occasional chaos, I like to keep learning, creating, and laughing along the way
+    🌿✨ Thank you for visiting! — Ridhima Sharma
   </footer>
-
-  <!-- BACK TO TOP BUTTON -->
-  <button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
-
-  <script>
-    // Show button on scroll
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("topBtn");
-      if (document.documentElement.scrollTop > 300) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    });
-  </script>
 
 </body>
 </html>
-
