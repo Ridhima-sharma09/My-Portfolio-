@@ -1,27 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ridhima Sharma • Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-body { background: #fff8f0; color: #222; line-height: 1.6; }
-header { background: linear-gradient(120deg, #ff9a9e, #fad0c4); text-align: center; padding: 60px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
-header h1 { font-size: 3rem; color: #fff; }
-header p { font-size: 1.2rem; color: #fff; margin-top: 10px; }
-section { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
-h3 { font-size: 1.4rem; color: #ff8c94; margin-bottom: 10px; }
-p { margin-bottom: 15px; }
-.project, .skill, .activity, .testimonial { background: #fff3f0; border-radius: 15px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-a { color: #ff6f61; text-decoration: none; font-weight: 600; }
-a:hover { text-decoration: underline; }
-ul { margin-left: 20px; margin-bottom: 15px; }
-li { margin-bottom: 8px; }
-footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top-left-radius: 50px; border-top-right-radius: 50px; color: #fff; margin-top: 50px; }
-.emoji { font-size: 1.2rem; margin-right: 5px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+  body { background: #fff8f0; color: #222; line-height: 1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+  header { background: linear-gradient(120deg, #ff9a9e, #fad0c4); text-align: center; padding: 60px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
+  header h1 { font-size: 3rem; color: #fff; }
+  header p { font-size: 1.2rem; color: #fff; margin-top: 10px; }
+  section { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+  h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
+  h3 { font-size: 1.4rem; color: #ff8c94; margin-bottom: 10px; }
+  p { margin-bottom: 15px; }
+  .project, .skill, .activity { background: #fff3f0; border-radius: 15px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+  a { color: #ff6f61; text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+  ul { margin-left: 20px; margin-bottom: 15px; }
+  li { margin-bottom: 8px; }
+  footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top-left-radius: 50px; border-top-right-radius: 50px; color: #fff; margin-top: 50px; }
+  .emoji { font-size: 1.2rem; margin-right: 5px; }
+
+  /* ---------------------------
+     Glassmorphism Giving Back + Testimonials
+     Medium blur + extra-rounded cards
+     --------------------------- */
+  :root{
+    --bg1: linear-gradient(135deg, rgba(12,17,35,0.02) 0%, rgba(255,248,240,0.02) 100%);
+    --accent1: rgba(138,85,255,0.40);
+    --accent2: rgba(88,210,255,0.26);
+    --glass-bg: rgba(255,255,255,0.65);
+    --glass-border: rgba(255,255,255,0.55);
+    --card-radius: 24px; /* extra rounded */
+    --glass-blur: 8px; /* medium intensity */
+    --max-width: 1100px;
+  }
+
+  /* container for glass sections - keeps them visually distinct */
+  .glass-section { max-width: var(--max-width); margin: 40px auto; padding: 28px; }
+  .glass-row { display:grid; grid-template-columns: 1fr 1fr; gap:20px; align-items:start; }
+  @media (max-width:900px){ .glass-row { grid-template-columns: 1fr; } }
+
+  .glass-card{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    padding:18px;
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
+    box-shadow: 0 10px 30px rgba(6,10,20,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+    transition: transform 320ms ease, box-shadow 320ms ease;
+    overflow:hidden;
+  }
+  .glass-card:hover{ transform: translateY(-6px); box-shadow: 0 22px 60px rgba(6,10,20,0.12); }
+
+  .glass-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .kicker { font-weight:700; color: #6b6b6b; font-size:13px; opacity:0.92; }
+  .glass-sub { color:#444; margin-bottom:10px; }
+
+  /* Giving Back layout */
+  .impact-list { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+  .impact-item { display:flex; gap:12px; align-items:flex-start; }
+  .impact-icon { width:56px; height:56px; border-radius:14px; flex:0 0 56px; display:grid; place-items:center; font-weight:700; background: linear-gradient(180deg,var(--accent1),var(--accent2)); color:#042; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+  .impact-content h4 { margin:0 0 6px 0; font-size:15px; }
+  .impact-content p { margin:0; font-size:14px; color:#333; }
+
+  .metrics { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .metric { background: rgba(255,255,255,0.9); padding:9px 12px; border-radius:12px; font-weight:700; min-width:110px; text-align:center; box-shadow: 0 6px 20px rgba(6,10,20,0.04); }
+  .metric span { display:block; font-size:18px; }
+  .metric label { display:block; font-size:12px; color:#555; margin-top:4px; font-weight:600; }
+
+  /* Testimonials */
+  .testimonials-wrap{ display:flex; flex-direction:column; gap:12px; }
+  .carousel { position:relative; overflow:hidden; border-radius: var(--card-radius); }
+  .slides { display:flex; transition: transform 520ms cubic-bezier(.2,.9,.25,1); }
+  .slide { min-width:100%; padding:20px; box-sizing:border-box; }
+  .testimonial-card { display:flex; gap:16px; align-items:flex-start; }
+  .avatar { width:72px; height:72px; border-radius:16px; background:linear-gradient(180deg,var(--accent2),var(--accent1)); display:grid; place-items:center; font-weight:700; color:#041321; flex:0 0 72px; }
+  .quote p { margin:0 0 8px 0; font-size:15px; color:#333; }
+  .quote .author { font-weight:700; font-size:13px; color:#111; }
+  .quote .meta { font-size:12px; color:#666; margin-top:4px; }
+
+  .controls { display:flex; gap:10px; align-items:center; margin-top:12px; }
+  .dot { width:10px; height:10px; border-radius:20px; background:rgba(0,0,0,0.12); cursor:pointer; }
+  .dot.active { background: linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
+  .btn { padding:10px 14px; border-radius:12px; border:none; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#041321; font-weight:700; cursor:pointer; box-shadow: 0 8px 28px rgba(12,18,40,0.07); }
+  .link-ghost { padding:10px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.06); background:transparent; color:#333; cursor:pointer; font-weight:700; }
+
+  /* small responsive tweaks */
+  @media (max-width:520px){
+    .avatar{ width:56px; height:56px; flex:0 0 56px; border-radius:12px; }
+    .impact-icon{ width:48px; height:48px; flex:0 0 48px; border-radius:12px; }
+  }
+
+  /* subtle entrance */
+  .reveal{ transform: translateY(6px); opacity:0; animation:enter 520ms forwards; }
+  .reveal.delay{ animation-delay:120ms; }
+  @keyframes enter{ to{ transform:none; opacity:1; } }
+
+  /* keep original testimonial-box style available as fallback */
+  .testimonial-box { width:320px; background:#ffffff; border:1px solid #e0e0e0; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
+  .testimonial-box:hover{ transform:translateY(-5px); }
+  .testimonial-text{ font-size:1rem; line-height:1.5; color:#444; }
+  .testimonial-author{ margin-top:15px; font-weight:600; text-align:right; color:#333; }
 </style>
 </head>
 <body>
@@ -96,47 +180,210 @@ footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top
 
   </section>
 
-  <!-- Giving Back to the Community Section -->
-  <section id="giving-back">
-    <h2>🌱 Giving Back to the Community</h2>
-    <p><strong>How My Projects Created Real Impact</strong></p>
-
-    <div class="project">
-      <h3>📖 The Last Bookmark — AI-Powered Journal App</h3>
-      <p><strong>Impact:</strong><br>
-      I built The Last Bookmark not just as a project, but as a tribute to Ms. Shivani Sharma, the teacher who inspired my love for introspection, philosophy, and emotional clarity.
-      My classmates used the app during stressful academic phases, especially before exams. Many shared that the daily journaling space helped them slow down, reflect, and feel less overwhelmed.
-      The collection of handpicked quotes sparked meaningful conversations around mental health, self-awareness, and emotional expression.
-      This project became my way of encouraging students to pause, breathe, and write — a small step toward a healthier mindset.</p>
+  <!-- ===== Glassmorphism: Giving Back to the Community ===== -->
+  <section class="glass-section reveal" id="giving-back">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px">
+      <div>
+        <div class="kicker">Giving Back • Community Impact</div>
+        <h2 style="margin-top:6px;color:#ff6f61">Where Kindness Comes Full Circle</h2>
+        <p class="glass-sub" style="margin-top:8px;color:#555">Every act of giving creates a ripple that reaches far beyond what we see. This section highlights how your contributions make a difference and come back to inspire more kindness.Small tools, real effects — stories from classmates, pharmacy staff, and the people who used these projects.</p>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>🖤 Dark Mode GUI Calculator</h3>
-      <p><strong>Impact:</strong><br>
-      A simple tool, but surprisingly helpful.
-      My classmates used the calculator during internal assessments and lab work, appreciating its clean, distraction-free design.
-      Teachers also found it handy because, unlike mobile apps filled with ads, this calculator is manual, reliable, and focused.
-      It reminded me that even the smallest tools, when built with care, can remove friction and make everyday tasks smoother.</p>
+    <div class="glass-row" style="margin-top:14px">
+      <!-- Left column: The Last Bookmark + PharmEase -->
+      <div class="glass-card">
+        <h3 style="margin-top:0">Your Most Recent Bookmark in Action (student mental health)</h3>
+        <p style="color:#444;margin-top:6px">Built as a safe journaling space inspired by Ms. Shivani Sharma, who encouraged reflection and deep thinking. Classmates used the app around exam time and reported that short guided prompts helped them process stress and feel calmer.</p>
+
+        <div class="impact-list" style="margin-top:12px">
+          <div class="impact-item">
+            <div class="impact-icon">JB</div>
+            <div class="impact-content">
+              <h4>Emotional support</h4>
+              <p>Short prompts & a private writing space helped students slow down during high-stress periods.</p>
+            </div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-icon">PS</div>
+            <div class="impact-content">
+              <h4>Privacy-first</h4>
+              <p>No ads and local-first storage (export optional) — designed to respect user privacy.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics" aria-hidden="true">
+          <div class="metric"><span>~20</span><label>classmates reached</label></div>
+          <div class="metric"><span>50+</span><label>entries logged</label></div>
+        </div>
+
+        <div style="margin-top:12px;color:#6b6b6b;font-size:13px">Information: The figures shown are approximations. Accurate counts will be available after backend database integration is implemented.</div>
+      </div>
+
+      <!-- Right column: PharmEase + Calculator -->
+      <div class="glass-card reveal delay">
+        <h3 style="margin-top:0">💊 PharmEase — Pharmacy assistant (workflow)</h3>
+        <p style="color:#444;margin-top:6px">A small, practical tool given to local pharmacies to help track expiry dates and stock. Staff used the expiry tracker and reported fewer manual errors and clearer daily reconciliation.</p>
+
+        <div class="impact-list" style="margin-top:12px">
+          <div class="impact-item">
+            <div class="impact-icon">OC</div>
+            <div class="impact-content">
+              <h4>Expiry monitoring</h4>
+              <p>Color-Excel integration with OpenPyXL for list.</p>
+            </div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-icon">✓</div>
+            <div class="impact-content">
+              <h4>Less manual error</h4>
+              <p>Reduced mistakes during stock counts and faster reconciliation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics" aria-hidden="true">
+          <div class="metric"><span>3</span><label>pharmacies helped</label></div>
+          <div class="metric"><span>~80</span><label>meds tracked</label></div>
+        </div>
+
+        <div style="margin-top:12px;color:#6b6b6b;font-size:13px">Note: The figures shown here are estimates, generated via OpenPyXL, Excel, and CSV files. Final numbers may vary once full backend integration is implemented..</div>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>💊 PharmEase — Pharmacy Management System</h3>
-      <p><strong>Impact:</strong><br>
-      This project gave me one of my proudest moments.
-      I shared PharmEase with local pharmacies, and they actually used it — especially the manual stock calculator and the expiry-date tracker.
-      It helped them reduce human error, prevent expired medicines from being sold, and maintain clearer, more organized records.
-      Store owners mentioned that it saved them time and improved accuracy during daily operations.
-      Knowing that something I built could support community workers who serve people every day felt incredibly meaningful.</p>
-    </div>
-
-    <div class="project">
-      <h3>🌟 In Essence</h3>
-      <p>These projects aren’t just lines of code — they are small pieces of me.
-      A way to give back to my classmates, my community… and especially to Ms. Shivani Sharma, whose guidance shaped my thinking and values.
-      Through journaling, better organization, and practical tools, I hope to continue creating technology that helps people in real life — quietly, simply, and sincerely.</p>
+    <div style="margin-top:14px" class="glass-card">
+      <h3 style="margin-top:0">🖤 Dark Mode GUI Calculator</h3>
+      <p style="color:#444;margin-top:6px">A focused, ad-free calculator that classmates and teachers used during tests and lab sessions — simple tools sometimes save the most time.</p>
+      <div style="margin-top:8px;color:#666;font-size:13px">Small tools, quietly helpful — these projects reflect care for people and real use over purely technical complexity.</div>
     </div>
   </section>
 
+  <!-- ===== Glassmorphism: Testimonials ===== -->
+  <section class="glass-section reveal" id="testimonials-glass" aria-label="Testimonials">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;">
+      <div>
+        <div class="kicker">Testimonials • Credibility</div>
+        <h2 style="margin-top:6px;color:#ff6f61">The Voices Behind the Experience</h2>
+        <p class="glass-sub" style="margin-top:8px;color:#555">Short, authentic reflections from classmates, teachers, and a local pharmacy owner.Timeless reflections from individuals whose moments aligned with my work</p>
+      </div>
+    </div>
+
+    <div class="glass-row" style="margin-top:14px">
+      <!-- Carousel column -->
+      <div class="glass-card">
+        <div class="testimonials-wrap">
+          <div class="carousel" aria-roledescription="carousel" aria-label="User testimonials">
+            <div class="slides" id="slides">
+              <!-- Slide 1 -->
+              <div class="slide">
+                <div class="testimonial-card">
+                  <div class="avatar">EA</div>
+                  <div class="quote">
+                    <p>"This app feels like a warm reminder of my teacher’s inspiration. It lifts my mood and helps melt my stress every time I use it."</p>
+                    <div class="author">— Ekanshi A.</div>
+                    <div class="meta">Classmate • The Last Bookmark</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="slide">
+                <div class="testimonial-card">
+                  <div class="avatar">SJ</div>
+                  <div class="quote">
+                    <p>"Ridhima's app genuinely helped me during exam time. It felt calming and personal. It’s become a real stress-buster for me — like a safe space."</p>
+                    <div class="author">— Shivam J.</div>
+                    <div class="meta">Peer • The Last Bookmark</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="slide">
+                <div class="testimonial-card">
+                  <div class="avatar">PO</div>
+                  <div class="quote">
+                    <p>"PharmEase made our daily work so much easier. The expiry tracker saved us from making mistakes."</p>
+                    <div class="author">— Pharmacy Owner</div>
+                    <div class="meta">Vivek Vihar • PharmEase</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Teacher -->
+              <div class="slide">
+                <div class="testimonial-card">
+                  <div class="avatar">AS</div>
+                  <div class="quote">
+                    <p>"As a mathematics enthusiast, tough calculations had been my hinderance to get better results in less time, but my comrade's calculator, proved to be a boon for me as if it just shortened my path to success."</p>
+                    <div class="author">— Arnav S.</div>
+                    <div class="meta">peer • Calculator</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="controls" role="tablist" aria-label="Testimonial controls" style="align-items:center;">
+            <div class="dot active" data-index="0" aria-controls="slides" aria-label="Slide 1"></div>
+            <div class="dot" data-index="1" aria-controls="slides" aria-label="Slide 2"></div>
+            <div class="dot" data-index="2" aria-controls="slides" aria-label="Slide 3"></div>
+            <div class="dot" data-index="3" aria-controls="slides" aria-label="Slide 4"></div>
+
+            <div style="flex:1"></div>
+
+            <button class="link-ghost" id="shareBtn">Share your story</button>
+            <button class="btn" id="ctaGit">View projects</button>
+          </div>
+
+          <div style="margin-top:10px;color:#666;font-size:13px">Please note: Headshot photos are not provided to protect privacy, and some individuals featured are under 18.</div>
+        </div>
+      </div>
+
+      <!-- Right column: quick metrics & CTA -->
+      <div class="glass-card reveal delay">
+        <h3 style="margin-top:0">Credibility at a glance</h3>
+        <p style="color:#444;margin-top:6px">Please note: The numbers shown are estimated and generated using OpenPyXL and CSV files. A full backend database is not yet integrated.</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;gap:12px">
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:20px">4.9/5</div>
+              <div style="color:#666;font-size:13px">average satisfaction</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:20px">3</div>
+              <div style="color:#666;font-size:13px">pharmacies onboarded</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:20px">20+</div>
+              <div style="color:#666;font-size:13px">classmates reached</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:20px">50+</div>
+              <div style="color:#666;font-size:13px">journal entries</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;color:#6b6b6b;font-size:13px">backend will be intregrated soon for maximum effect and statics.</div>
+
+          <div style="margin-top:14px;display:flex;gap:12px;">
+            <button class="btn" id="downloadCV">Download CV</button>
+            <button class="link-ghost" id="contactMe">Contact</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- rest of your content (Skills, Activities, Social links, Contact) -->
   <section>
     <h2>Skills & Expertise</h2>
 
@@ -211,89 +458,55 @@ footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top
   <section>
     <h2>Contact</h2>
     <p>Email: <a href="mailto:ridhima7227@gmail.com">ridhima7227@gmail.com</a></p>
-
-  <section id="testimonials">
-  <h2>Testimonials</h2>
-
-  <div class="testimonials-container">
-
-    <div class="testimonial-box">
-      <p class="testimonial-text">
-        "This app feels like a warm reminder of my teacher’s inspiration. It lifts my mood and helps melt my stress every time I use it."
-      </p>
-      <p class="testimonial-author">— Ekanshi A.</p>
-    </div>
-
-    <div class="testimonial-box">
-      <p class="testimonial-text">
-        "Ridhima's app genuinely helped me during exam time. It felt calming and personal. It’s become a real stress-buster for me — like a safe space."
-      </p>
-      <p class="testimonial-author">— Shivam J.</p>
-    </div>
-
-    <div class="testimonial-box">
-      <p class="testimonial-text">
-        "PharmEase made our daily work so much easier. The expiry tracker saved us from making mistakes."
-      </p>
-      <p class="testimonial-author">— Pharmacy Owner (Vivek Vihar)</p>
-    </div>
-
-  </div>
-</section>
-
-<style>
-  #testimonials {
-    padding: 40px 20px;
-  }
-
-  #testimonials h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-
-  .testimonials-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-  }
-
-  .testimonial-box {
-    width: 320px;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease;
-  }
-
-  .testimonial-box:hover {
-    transform: translateY(-5px);
-  }
-
-  .testimonial-text {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #444;
-  }
-
-  .testimonial-author {
-    margin-top: 15px;
-    font-weight: 600;
-    text-align: right;
-    color: #333;
-  }
-</style>
-
-
+  </section>
 
   <footer>
-    I’m a 16-year-old student and developer with an insatiable curiosity about the world. When I’m not experimenting with chemistry or lost in philosophical books and quotes, you’ll probably find me sketching realistic portraits or overthinking life’s little mysteries. Powered by coffee, ideas, and occasional chaos, I like to keep learning, creating, and laughing along the way
-    🌿✨ Thank you for visiting! — Ridhima Sharma
+    I’m a 16-year-old student and developer with an insatiable curiosity about the world. When I’m not experimenting with chemistry or lost in philosophical books and quotes, you’ll probably find me sketching realistic portraits or overthinking life’s little mysteries. Powered by coffee, ideas, and occasional chaos, I like to keep learning, creating, and laughing along the way 🌿✨ Thank you for visiting! — Ridhima Sharma
   </footer>
+
+<script>
+  // Carousel logic for testimonials
+  (function(){
+    const slides = document.getElementById('slides');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    let idx = 0;
+    const max = slides ? slides.children.length : 0;
+    let autoplay = true;
+    let autoTimer;
+
+    function go(i){
+      idx = (i + max) % max;
+      if (slides) slides.style.transform = 'translateX(' + (-idx * 100) + '%)';
+      dots.forEach(d=>d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+
+    if (dots.length){
+      dots.forEach(d=>d.addEventListener('click', ()=>{
+        const i = parseInt(d.dataset.index);
+        go(i);
+        autoplay = false;
+        clearInterval(autoTimer);
+      }));
+    }
+
+    function startAuto(){
+      autoTimer = setInterval(()=>{ if(autoplay) go(idx+1); }, 4200);
+    }
+    startAuto();
+
+    // CTA hooks (replace links as needed)
+    const ctaGit = document.getElementById('ctaGit');
+    if(ctaGit) ctaGit.addEventListener('click', ()=>{ window.open('https://github.com/ridhima-sharma09','_blank'); });
+    const downloadCV = document.getElementById('downloadCV');
+    if(downloadCV) downloadCV.addEventListener('click', ()=>{ alert('will be provided soon!'); });
+    const contactMe = document.getElementById('contactMe');
+    if(contactMe) contactMe.addEventListener('click', ()=>{ window.location.href = 'mailto:ridhima7227@gmail.com'; });
+    const shareBtn = document.getElementById('shareBtn');
+    if(shareBtn) shareBtn.addEventListener('click', ()=>{ alert('forms will be out in some days.'); });
+
+  })();
+</script>
 
 </body>
 </html>
-
