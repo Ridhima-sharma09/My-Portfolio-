@@ -22,6 +22,64 @@
   li { margin-bottom: 8px; }
   footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top-left-radius: 50px; border-top-right-radius: 50px; color: #fff; margin-top: 50px; }
   .emoji { font-size: 1.2rem; margin-right: 5px; }
+  .popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: white;
+  padding: 25px;
+  width: 350px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-box input,
+.popup-box textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.popup-box textarea {
+  resize: none;
+  height: 120px;
+}
+
+.popup-box button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: #ccc;
+  color: black;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
 
   /* ---------------------------
      Glassmorphism Giving Back + Testimonials
@@ -109,6 +167,26 @@
 </style>
 </head>
 <body>
+<!-- Testimonial Popup -->
+<div id="testimonialPopup" class="popup-overlay">
+  <div class="popup-box">
+    <h2>Submit a Testimonial</h2>
+
+    <form id="testimonialForm" action="https://formsubmit.co/ridhima7227@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="role" placeholder="Designation / How you know me">
+      <textarea name="testimonial" placeholder="Write your testimonial..." required></textarea>
+
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Optional redirect after submit -->
+      <!-- <input type="hidden" name="_next" value="https://ridhima-sharma09.github.io/My-Portfolio-/thankyou.html"> -->
+
+      <button type="submit">Submit</button>
+      <button type="button" id="closePopup" class="close-btn">Close</button>
+    </form>
+  </div>
+</div>
 
   <header>
     <h1>Ridhima Sharma</h1>
@@ -494,16 +572,36 @@
       autoTimer = setInterval(()=>{ if(autoplay) go(idx+1); }, 4200);
     }
     startAuto();
+    // CTA hooks
+const ctaGit = document.getElementById('ctaGit');
+if(ctaGit) ctaGit.addEventListener('click', () => {
+  window.open('https://github.com/ridhima-sharma09','_blank');
+});
 
-    // CTA hooks (replace links as needed)
-    const ctaGit = document.getElementById('ctaGit');
-    if(ctaGit) ctaGit.addEventListener('click', ()=>{ window.open('https://github.com/ridhima-sharma09','_blank'); });
-    const downloadCV = document.getElementById('downloadCV');
-    if(downloadCV) downloadCV.addEventListener('click', ()=>{ alert('will be provided soon!'); });
-    const contactMe = document.getElementById('contactMe');
-    if(contactMe) contactMe.addEventListener('click', ()=>{ window.location.href = 'mailto:ridhima7227@gmail.com'; });
-    const shareBtn = document.getElementById('shareBtn');
-    if(shareBtn) shareBtn.addEventListener('click', ()=>{ alert('forms will be out in some days.'); });
+const downloadCV = document.getElementById('downloadCV');
+if(downloadCV) downloadCV.addEventListener('click', () => {
+  alert('Will be provided soon!');
+});
+
+const contactMe = document.getElementById('contactMe');
+if(contactMe) contactMe.addEventListener('click', () => {
+  window.location.href = 'mailto:ridhima7227@gmail.com';
+});
+
+// Testimonial popup
+const shareBtn = document.getElementById('shareBtn');
+const testimonialPopup = document.getElementById('testimonialPopup');
+const closePopup = document.getElementById('closePopup');
+
+if(shareBtn) shareBtn.addEventListener('click', () => {
+  testimonialPopup.style.display = 'flex';
+});
+
+if(closePopup) closePopup.addEventListener('click', () => {
+  testimonialPopup.style.display = 'none';
+});
+
+    
 
   })();
 </script>
