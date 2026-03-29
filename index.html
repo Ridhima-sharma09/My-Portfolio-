@@ -1,633 +1,919 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ridhima Sharma • Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Ridhima Sharma ✦ Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,700;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-  body { background: #fff8f0; color: #222; line-height: 1.6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-  header { background: linear-gradient(120deg, #ff9a9e, #fad0c4); text-align: center; padding: 60px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
-  header h1 { font-size: 3rem; color: #fff; }
-  header p { font-size: 1.2rem; color: #fff; margin-top: 10px; }
-  section { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-  h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6f61; border-bottom: 2px solid #ff6f61; display: inline-block; padding-bottom: 5px; }
-  h3 { font-size: 1.4rem; color: #ff8c94; margin-bottom: 10px; }
-  p { margin-bottom: 15px; }
-  .project, .skill, .activity { background: #fff3f0; border-radius: 15px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-  a { color: #ff6f61; text-decoration: none; font-weight: 600; }
-  a:hover { text-decoration: underline; }
-  ul { margin-left: 20px; margin-bottom: 15px; }
-  li { margin-bottom: 8px; }
-  footer { text-align: center; padding: 40px 20px; background: #ff9a9e; border-top-left-radius: 50px; border-top-right-radius: 50px; color: #fff; margin-top: 50px; }
-  .emoji { font-size: 1.2rem; margin-right: 5px; }
-  .popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+:root{
+  --cream:#fdf8ff;--cream2:#f8f0ff;--petal:#fff0f8;
+  --lavender:#ede4ff;--lav2:#d8c8ff;--lav3:#b8a0e8;
+  --rose:#ffd6eb;--rose2:#ffb3d9;--rose3:#d4568a;
+  --candy:#ff9ec8;--mint:#e0fff5;--gold:#ffe8a0;
+  --lilac:#c8a8f8;--ink:#2a1a3e;--ink2:#4a3060;--ink3:#7a5898;
+  --muted:#a890c0;--muted2:#c8b8e0;
+  --ff-serif:'Fraunces',Georgia,serif;
+  --ff-play:'Playfair Display',serif;
+  --ff-sans:'DM Sans',sans-serif;
+  --ff-jose:'Josefin Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--ff-sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* MAGIC CANVAS */
+#magic-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.spark{position:absolute;opacity:0;user-select:none;animation:floatUp linear infinite}
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(0) rotate(-15deg) scale(.5)}
+  8%{opacity:1}92%{opacity:.35}
+  100%{opacity:0;transform:translateY(-105vh) rotate(20deg) scale(1.2)}
 }
 
-.popup-box {
-  background: white;
-  padding: 25px;
-  width: 350px;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  animation: fadeIn 0.3s ease;
+/* CURSOR — desktop only */
+#cur,#cur-ring{display:none}
+@media(hover:hover) and (pointer:fine){
+  #cur{display:block;position:fixed;width:14px;height:14px;background:radial-gradient(circle,#ffb3d9,#c8a8f8);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;box-shadow:0 0 12px rgba(200,168,248,.6)}
+  #cur-ring{display:block;position:fixed;width:40px;height:40px;border:1.5px solid rgba(200,168,248,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease}
 }
 
-.popup-box input,
-.popup-box textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
+/* NAV */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:20px;padding:11px 24px;background:rgba(253,248,255,.88);backdrop-filter:blur(20px);border-radius:100px;border:1.5px solid rgba(200,168,248,.3);box-shadow:0 8px 32px rgba(180,140,240,.12);white-space:nowrap;max-width:calc(100vw - 28px)}
+.nav-logo{font-family:var(--ff-serif);font-style:italic;font-size:16px;color:var(--ink2);letter-spacing:.02em;flex-shrink:0}
+.nav-links{display:flex;gap:18px}
+.nav-links a{font-family:var(--ff-jose);font-size:10px;color:var(--ink3);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--rose3)}
+@media(max-width:600px){.nav-links{display:none}}
+
+/* HERO */
+#hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;padding-top:70px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:60px 40px 60px 52px;position:relative;z-index:1}
+.hero-right{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 52px 60px 32px;position:relative;z-index:1}
+#hero::before{content:'';position:absolute;top:-5%;right:-5%;width:62%;height:115%;background:linear-gradient(160deg,var(--lavender) 0%,var(--rose) 55%,var(--gold) 100%);border-radius:40% 0 0 40%;opacity:.22;pointer-events:none}
+#hero::after{content:'';position:absolute;bottom:-10%;left:35%;width:40%;height:50%;background:radial-gradient(ellipse,rgba(200,168,248,.15),transparent 70%);pointer-events:none}
+
+.hero-tag-line{font-family:var(--ff-jose);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose3);margin-bottom:18px;display:flex;align-items:center;gap:9px}
+.hero-tag-line::before{content:'✦';font-size:11px}
+.hero-name{font-family:var(--ff-serif);font-size:clamp(48px,8vw,118px);font-weight:700;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin-bottom:4px}
+.hero-name em{font-style:italic;font-weight:300;color:var(--lav3);display:block}
+.hero-subtitle{font-family:var(--ff-serif);font-style:italic;font-size:clamp(13px,1.5vw,17px);color:var(--ink3);font-weight:300;max-width:360px;margin:20px 0 28px;line-height:1.9;border-left:3px solid var(--rose2);padding-left:16px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:32px}
+.hero-pill{padding:6px 16px;border-radius:100px;font-family:var(--ff-jose);font-size:9px;letter-spacing:.1em;text-transform:uppercase;transition:all .25s;cursor:default}
+.hp-lav{background:var(--lavender);color:#5030a0;border:1px solid rgba(180,140,255,.3)}
+.hp-rose{background:var(--rose);color:#902050;border:1px solid rgba(255,150,200,.3)}
+.hp-mint{background:var(--mint);color:#1a5040;border:1px solid rgba(140,220,200,.3)}
+.hp-gold{background:var(--gold);color:#6a4010;border:1px solid rgba(240,200,80,.3)}
+.hero-pill:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(180,140,255,.2)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* BUTTONS */
+.btn-main{padding:13px 28px;border-radius:100px;background:linear-gradient(135deg,#c078f0,#f088c0);color:#fff;font-family:var(--ff-jose);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 8px 28px rgba(192,120,240,.32)}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(192,120,240,.42)}
+.btn-soft{padding:13px 28px;border-radius:100px;background:transparent;color:var(--ink2);font-family:var(--ff-jose);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--lav2);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:all .25s}
+.btn-soft:hover{background:var(--lavender);border-color:var(--lav3)}
+
+/* DIARY CARD */
+.diary-card{width:100%;max-width:340px;background:#fffdf9;border:1.5px solid #e8dcc8;border-radius:4px 20px 20px 4px;padding:28px 24px;position:relative;box-shadow:6px 6px 0 rgba(200,168,248,.22),-2px -2px 0 rgba(255,180,200,.12)}
+.diary-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#c8a8f8,#ffb3d9,#ffe8a0);border-radius:4px 0 0 4px}
+.diary-lines{display:flex;flex-direction:column;gap:18px;padding-top:4px}
+.diary-line{border-bottom:1px dashed rgba(200,168,248,.4);padding-bottom:14px}
+.diary-line:last-child{border-bottom:none}
+.diary-date{font-family:var(--ff-jose);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.diary-entry{font-family:var(--ff-play);font-style:italic;font-size:12px;color:var(--ink2);line-height:1.75}
+.diary-entry strong{color:var(--rose3);font-style:normal}
+.diary-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+.diary-stat{background:var(--lavender);border-radius:12px;padding:12px;text-align:center;border:1px solid rgba(200,168,248,.3)}
+.diary-stat-num{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--ink2);line-height:1}
+.diary-stat-lbl{font-family:var(--ff-jose);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:3px}
+
+/* WAVY RIBBON */
+.ribbon{width:100%;overflow:hidden;line-height:0;margin:-1px 0;position:relative;z-index:1}
+.ribbon svg{display:block;width:100%}
+
+/* SECTION BASE */
+.wrap{max-width:1080px;margin:0 auto;padding:80px 48px;position:relative;z-index:1}
+.sec-eyebrow{font-family:var(--ff-jose);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rose3);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-eyebrow::before{content:'✦'}
+.sec-title{font-family:var(--ff-serif);font-size:clamp(30px,4.5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:48px;color:var(--ink)}
+.sec-title em{font-style:italic;font-weight:300;color:var(--lav3)}
+.sec-title span{color:var(--rose3)}
+
+/* ABOUT */
+#about{background:linear-gradient(160deg,#fdf8ff 60%,#fff0f8 100%)}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.about-text p{font-size:15px;color:var(--ink2);margin-bottom:18px;font-weight:300;line-height:1.9}
+.about-text p strong{color:var(--ink);font-weight:500}
+.about-text p em{color:var(--rose3);font-style:italic}
+.stat-masonry{display:flex;flex-direction:column;gap:12px}
+.stat-tall{background:linear-gradient(135deg,var(--lavender),var(--rose));border-radius:24px;padding:30px 26px;position:relative;overflow:hidden}
+.stat-tall::after{content:'✦';position:absolute;right:14px;bottom:10px;font-size:56px;opacity:.08;color:var(--ink)}
+.stat-tall-num{font-family:var(--ff-serif);font-size:52px;font-weight:700;color:var(--ink);line-height:1}
+.stat-tall-lbl{font-family:var(--ff-jose);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:6px}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-mini{background:var(--cream2);border-radius:18px;padding:20px 16px;border:1.5px solid rgba(200,168,248,.25)}
+.stat-mini-num{font-family:var(--ff-serif);font-size:28px;font-weight:700;color:var(--ink2);line-height:1}
+.stat-mini-lbl{font-family:var(--ff-jose);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+/* ORIGIN STORY — art → code */
+#origin{background:var(--petal)}
+.origin-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.origin-visual{position:relative}
+.origin-canvas{
+  background:#fffdf9;border:1.5px solid #e8dcc8;border-radius:20px;
+  padding:32px 28px;
+  box-shadow:8px 8px 0 rgba(200,168,248,.18);
 }
-
-.popup-box textarea {
-  resize: none;
-  height: 120px;
+.origin-canvas::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#f0c8e0,#c8a8f8,#a8d8f0);border-radius:4px 0 0 4px}
+.sketch-line{display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px dashed rgba(200,168,248,.35)}
+.sketch-line:last-child{border-bottom:none}
+.sketch-icon{font-size:22px;flex-shrink:0;width:40px;text-align:center}
+.sketch-text{font-family:var(--ff-play);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.6}
+.sketch-text strong{font-style:normal;color:var(--rose3)}
+.origin-arrow{text-align:center;font-size:20px;color:var(--lav3);padding:8px 0}
+.origin-text p{font-size:15px;color:var(--ink2);margin-bottom:18px;font-weight:300;line-height:1.9}
+.origin-text p strong{color:var(--ink);font-weight:500}
+.origin-text p em{color:var(--rose3);font-style:italic}
+.origin-quote{
+  background:linear-gradient(135deg,var(--lavender),var(--rose));
+  border-radius:18px;padding:22px 24px;margin-top:24px;
+  font-family:var(--ff-play);font-style:italic;
+  font-size:14px;color:var(--ink2);line-height:1.8;
+  border-left:4px solid var(--candy);
 }
+.origin-quote::before{content:'"';font-size:40px;color:var(--lav3);line-height:.5;display:block;margin-bottom:6px}
 
-.popup-box button {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: black;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
+/* PROJECTS */
+#projects{background:var(--cream)}
+.proj-stagger{display:flex;flex-direction:column;gap:16px}
+.proj-card{border-radius:28px;overflow:hidden;border:1.5px solid rgba(200,168,248,.2);transition:all .35s;background:var(--cream2)}
+.proj-card:hover{border-color:rgba(200,168,248,.5);box-shadow:0 20px 50px rgba(180,140,255,.1);transform:translateY(-4px)}
+@media(min-width:700px){.proj-card:nth-child(odd){margin-right:36px}.proj-card:nth-child(even){margin-left:36px}}
+.proj-head{display:flex;align-items:center;gap:16px;padding:22px 28px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.proj-emoji{font-size:24px;flex-shrink:0;width:50px;height:50px;border-radius:14px;background:var(--lavender);display:flex;align-items:center;justify-content:center}
+.proj-name{font-family:var(--ff-serif);font-size:clamp(16px,2.5vw,22px);font-weight:700;flex:1;color:var(--ink)}
+.proj-chips{display:flex;gap:6px;flex-shrink:0}
+.chip{padding:4px 11px;border-radius:100px;font-family:var(--ff-jose);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:var(--rose);color:#802040;border:1px solid rgba(255,150,200,.3)}
+.proj-arr{font-size:18px;color:var(--muted);flex-shrink:0;transition:all .25s;width:28px;text-align:center}
+.proj-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.proj-body.open{max-height:560px}
+.proj-inner{padding:0 28px 28px;border-top:1.5px dashed rgba(200,168,248,.3);padding-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.proj-desc{font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:14px;font-weight:300}
+.proj-desc strong{color:var(--ink);font-weight:500}
+.proj-link a{font-family:var(--ff-jose);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose3);text-decoration:none;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;transition:border-color .2s}
+.proj-link a:hover{border-color:var(--rose3)}
+.feat-list{list-style:none}
+.feat-list li{padding:8px 0;border-bottom:1px dashed rgba(200,168,248,.3);font-size:12px;color:var(--ink2);font-weight:300;display:flex;align-items:center;gap:9px}
+.feat-list li::before{content:'✦';color:var(--candy);font-size:9px;flex-shrink:0}
+.feat-list li:last-child{border-bottom:none}
+
+/* SKILLS */
+#skills{background:linear-gradient(135deg,var(--cream2),var(--petal))}
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.skill-card{background:var(--cream);border-radius:24px;padding:28px 22px;border:1.5px solid rgba(200,168,248,.2);transition:all .3s;position:relative;overflow:hidden}
+.skill-card::before{content:'';position:absolute;top:-36px;right:-36px;width:90px;height:90px;border-radius:50%;opacity:.18}
+.skill-card:nth-child(1)::before{background:var(--lilac)}.skill-card:nth-child(2)::before{background:var(--candy)}.skill-card:nth-child(3)::before{background:var(--gold)}.skill-card:nth-child(4)::before{background:var(--mint)}
+.skill-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(180,140,255,.1)}
+.skill-ico{font-size:26px;margin-bottom:12px;display:block}
+.skill-name{font-family:var(--ff-serif);font-size:19px;font-weight:700;color:var(--ink2);margin-bottom:14px}
+.skill-items{list-style:none}
+.skill-items li{font-size:12px;color:var(--ink3);font-weight:300;padding:5px 0;border-bottom:1px solid rgba(200,168,248,.12);display:flex;align-items:center;gap:8px}
+.skill-items li:last-child{border-bottom:none}
+.skill-items li::before{content:'·';color:var(--candy);font-size:18px;line-height:1}
+
+/* IMPACT */
+#impact{background:var(--cream)}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bento-card{border-radius:22px;padding:28px 22px;border:1.5px solid rgba(200,168,248,.2);transition:all .3s;position:relative;overflow:hidden}
+.bento-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(180,140,255,.1)}
+.bc-lav{background:linear-gradient(135deg,var(--lavender),var(--cream2))}
+.bc-rose{background:linear-gradient(135deg,var(--rose),var(--petal))}
+.bc-gold{background:linear-gradient(135deg,var(--gold),#fff8e8)}
+.bc-wide{grid-column:span 3;background:var(--cream2);display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;border-radius:22px;padding:28px 28px;border:1.5px solid rgba(200,168,248,.2)}
+.bento-ico{font-size:22px;margin-bottom:10px}
+.bento-num{font-family:var(--ff-serif);font-size:48px;font-weight:700;line-height:1;color:var(--ink);margin-bottom:5px}
+.bento-lbl{font-family:var(--ff-jose);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.bento-sub{font-size:12px;color:var(--ink2);line-height:1.7;font-weight:300}
+.wide-col-title{font-family:var(--ff-jose);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose3);margin-bottom:7px}
+.wide-col-head{font-family:var(--ff-serif);font-size:17px;font-weight:700;color:var(--ink2);margin-bottom:7px}
+.wide-col-body{font-size:12px;color:var(--ink3);line-height:1.75;font-weight:300}
+.honest-note{grid-column:span 3;background:linear-gradient(to right,var(--lavender),var(--rose));border-radius:18px;padding:16px 22px;display:flex;align-items:flex-start;gap:13px;border:1.5px solid rgba(200,168,248,.3)}
+.honest-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.honest-text{font-size:12px;color:var(--ink2);line-height:1.65;font-weight:300}
+.honest-text strong{color:var(--ink);font-weight:500}
+
+/* TESTIMONIALS */
+#testimonials{background:linear-gradient(160deg,var(--petal),var(--cream2))}
+.testi-layout{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.testi-card{background:var(--cream);border-radius:22px;padding:26px;border:1.5px solid rgba(200,168,248,.2);transition:all .3s}
+.testi-card:hover{border-color:rgba(200,168,248,.4);transform:translateY(-3px)}
+.testi-card.featured{background:linear-gradient(135deg,var(--lavender),var(--rose));grid-column:span 2;border-color:rgba(255,150,200,.25)}
+.testi-qmark{font-family:var(--ff-play);font-size:64px;line-height:1;color:var(--lav3);opacity:.28;margin-bottom:-14px}
+.testi-card.featured .testi-qmark{color:var(--ink2)}
+.testi-text{font-family:var(--ff-play);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:20px}
+.testi-card.featured .testi-text{color:var(--ink);font-size:14px}
+.testi-author{display:flex;align-items:center;gap:11px}
+.testi-av{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--lav2),var(--rose2));display:flex;align-items:center;justify-content:center;font-family:var(--ff-jose);font-size:11px;font-weight:600;color:var(--ink2);flex-shrink:0}
+.testi-card.featured .testi-av{background:rgba(255,255,255,.5)}
+.testi-name{font-size:13px;font-weight:500;color:var(--ink)}
+.testi-role{font-family:var(--ff-jose);font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.06em}
+
+/* ACTIVITIES */
+#activities{background:var(--petal)}
+.act-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.act-card{background:var(--cream);border-radius:22px;padding:26px;border:1.5px solid rgba(200,168,248,.2);transition:all .3s}
+.act-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(180,140,255,.1)}
+.act-ico{font-size:26px;margin-bottom:12px}
+.act-name{font-family:var(--ff-serif);font-size:19px;font-weight:700;color:var(--ink2);margin-bottom:9px}
+.act-desc{font-size:13px;color:var(--ink3);line-height:1.75;font-weight:300}
+
+/* CONTACT */
+#contact-wrap{background:linear-gradient(135deg,var(--lavender) 0%,var(--rose) 55%,var(--gold) 100%);position:relative;z-index:1}
+.contact-inner{max-width:1080px;margin:0 auto;padding:80px 48px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.contact-big{font-family:var(--ff-serif);font-size:clamp(40px,6.5vw,80px);font-weight:700;line-height:.92;letter-spacing:-.03em;color:var(--ink)}
+.contact-big em{font-style:italic;font-weight:300;color:var(--ink2);display:block}
+.contact-sub{font-size:14px;color:var(--ink2);margin-top:18px;font-style:italic;font-weight:300;max-width:300px;line-height:1.75}
+.contact-links{display:flex;flex-direction:column;gap:11px}
+.contact-link{display:flex;align-items:center;gap:14px;padding:16px 20px;background:rgba(255,255,255,.62);backdrop-filter:blur(12px);border-radius:16px;border:1.5px solid rgba(255,255,255,.5);text-decoration:none;color:var(--ink);transition:all .3s}
+.contact-link:hover{background:rgba(255,255,255,.82);transform:translateX(5px)}
+.contact-link:visited{color:var(--ink)}
+.contact-link-ico{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.contact-link-txt{font-size:11px;letter-spacing:.02em;color:var(--ink);word-break:break-all}
+.contact-link-lbl{font-family:var(--ff-jose);font-size:9px;color:var(--ink3);margin-top:2px;letter-spacing:.08em}
+.contact-link-arr{margin-left:auto;color:var(--muted);font-size:15px;transition:all .3s;flex-shrink:0}
+.contact-link:hover .contact-link-arr{transform:translateX(4px);color:var(--rose3)}
+
+/* POPUP */
+.popup-overlay{position:fixed;inset:0;background:rgba(42,26,62,.5);display:none;justify-content:center;align-items:center;z-index:999;backdrop-filter:blur(10px);padding:20px}
+.popup-box{background:var(--cream);border:1.5px solid rgba(200,168,248,.4);padding:36px;width:100%;max-width:420px;border-radius:26px;display:flex;flex-direction:column;gap:13px;animation:popIn .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px rgba(180,140,255,.2)}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:none}}
+.popup-box h2{font-family:var(--ff-serif);font-size:24px;font-weight:700;color:var(--ink2)}
+.popup-box h2 span{color:var(--rose3);font-style:italic;font-weight:300}
+.popup-box input,.popup-box textarea{width:100%;padding:12px 15px;background:var(--cream2);border:1.5px solid rgba(200,168,248,.3);border-radius:12px;font-family:var(--ff-sans);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s}
+.popup-box input:focus,.popup-box textarea:focus{border-color:var(--lilac)}
+.popup-box input::placeholder,.popup-box textarea::placeholder{color:var(--muted)}
+.popup-box textarea{resize:none;height:105px}
+.popup-btns{display:flex;gap:10px}
+.popup-btns button{flex:1;padding:12px;border:none;border-radius:100px;font-family:var(--ff-jose);font-size:10px;font-weight:600;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+.pb-sub{background:linear-gradient(135deg,#c078f0,#f088c0);color:#fff}
+.pb-sub:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(192,120,240,.35)}
+.pb-cls{background:var(--lavender);color:var(--ink2)}
+
+/* FOOTER */
+footer{max-width:1080px;margin:0 auto;padding:36px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed rgba(200,168,248,.4);position:relative;z-index:1;flex-wrap:wrap;gap:16px}
+.footer-sig{font-family:var(--ff-serif);font-style:italic;font-size:17px;color:var(--ink2)}
+.footer-hearts{font-size:13px;letter-spacing:6px;color:var(--candy);opacity:.7}
+.footer-note{font-size:12px;color:var(--muted);font-style:italic;line-height:1.6}
+
+/* SCROLL REVEAL */
+.up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.up.show{opacity:1;transform:none}
+
+/* ══════════════════════
+   FULL RESPONSIVE MOBILE
+══════════════════════ */
+@media(max-width:820px){
+  /* nav */
+  nav{gap:12px;padding:10px 18px}
+  /* hero: stack vertically */
+  #hero{grid-template-columns:1fr;padding-top:80px}
+  .hero-left{padding:40px 22px 24px}
+  .hero-right{padding:0 22px 52px;align-items:flex-start}
+  .diary-card{max-width:100%}
+  .hero-name{font-size:clamp(42px,12vw,80px)}
+  /* wrap padding */
+  .wrap{padding:60px 22px}
+  /* about */
+  .about-layout{grid-template-columns:1fr;gap:36px}
+  /* origin */
+  .origin-layout{grid-template-columns:1fr;gap:36px}
+  /* projects */
+  .proj-card:nth-child(odd),.proj-card:nth-child(even){margin:0}
+  .proj-chips{display:none}
+  .proj-inner{grid-template-columns:1fr;gap:20px}
+  /* skills */
+  .skills-grid{grid-template-columns:1fr}
+  /* impact */
+  .bento{grid-template-columns:1fr 1fr}
+  .bc-wide{grid-column:span 2;grid-template-columns:1fr}
+  .honest-note{grid-column:span 2}
+  /* testi */
+  .testi-layout{grid-template-columns:1fr}
+  .testi-card.featured{grid-column:span 1}
+  /* activities */
+  .act-grid{grid-template-columns:1fr}
+  /* contact */
+  .contact-inner{padding:60px 22px}
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+  .contact-sub{max-width:100%}
+  /* footer */
+  footer{padding:32px 22px;flex-direction:column;align-items:center;text-align:center}
+  .footer-note{text-align:center}
 }
-
-.close-btn {
-  background: #ccc;
-  color: black;
+@media(max-width:480px){
+  .bento{grid-template-columns:1fr}
+  .bc-wide{grid-column:span 1}
+  .honest-note{grid-column:span 1}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .diary-stat-row{grid-template-columns:1fr 1fr}
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-  /* ---------------------------
-     Glassmorphism Giving Back + Testimonials
-     Medium blur + extra-rounded cards
-     --------------------------- */
-  :root{
-    --bg1: linear-gradient(135deg, rgba(12,17,35,0.02) 0%, rgba(255,248,240,0.02) 100%);
-    --accent1: rgba(138,85,255,0.40);
-    --accent2: rgba(88,210,255,0.26);
-    --glass-bg: rgba(255,255,255,0.65);
-    --glass-border: rgba(255,255,255,0.55);
-    --card-radius: 24px; /* extra rounded */
-    --glass-blur: 8px; /* medium intensity */
-    --max-width: 1100px;
-  }
-
-  /* container for glass sections - keeps them visually distinct */
-  .glass-section { max-width: var(--max-width); margin: 40px auto; padding: 28px; }
-  .glass-row { display:grid; grid-template-columns: 1fr 1fr; gap:20px; align-items:start; }
-  @media (max-width:900px){ .glass-row { grid-template-columns: 1fr; } }
-
-  .glass-card{
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--card-radius);
-    padding:18px;
-    backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.05);
-    box-shadow: 0 10px 30px rgba(6,10,20,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
-    transition: transform 320ms ease, box-shadow 320ms ease;
-    overflow:hidden;
-  }
-  .glass-card:hover{ transform: translateY(-6px); box-shadow: 0 22px 60px rgba(6,10,20,0.12); }
-
-  .glass-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-  .kicker { font-weight:700; color: #6b6b6b; font-size:13px; opacity:0.92; }
-  .glass-sub { color:#444; margin-bottom:10px; }
-
-  /* Giving Back layout */
-  .impact-list { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
-  .impact-item { display:flex; gap:12px; align-items:flex-start; }
-  .impact-icon { width:56px; height:56px; border-radius:14px; flex:0 0 56px; display:grid; place-items:center; font-weight:700; background: linear-gradient(180deg,var(--accent1),var(--accent2)); color:#042; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
-  .impact-content h4 { margin:0 0 6px 0; font-size:15px; }
-  .impact-content p { margin:0; font-size:14px; color:#333; }
-
-  .metrics { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-  .metric { background: rgba(255,255,255,0.9); padding:9px 12px; border-radius:12px; font-weight:700; min-width:110px; text-align:center; box-shadow: 0 6px 20px rgba(6,10,20,0.04); }
-  .metric span { display:block; font-size:18px; }
-  .metric label { display:block; font-size:12px; color:#555; margin-top:4px; font-weight:600; }
-
-  /* Testimonials */
-  .testimonials-wrap{ display:flex; flex-direction:column; gap:12px; }
-  .carousel { position:relative; overflow:hidden; border-radius: var(--card-radius); }
-  .slides { display:flex; transition: transform 520ms cubic-bezier(.2,.9,.25,1); }
-  .slide { min-width:100%; padding:20px; box-sizing:border-box; }
-  .testimonial-card { display:flex; gap:16px; align-items:flex-start; }
-  .avatar { width:72px; height:72px; border-radius:16px; background:linear-gradient(180deg,var(--accent2),var(--accent1)); display:grid; place-items:center; font-weight:700; color:#041321; flex:0 0 72px; }
-  .quote p { margin:0 0 8px 0; font-size:15px; color:#333; }
-  .quote .author { font-weight:700; font-size:13px; color:#111; }
-  .quote .meta { font-size:12px; color:#666; margin-top:4px; }
-
-  .controls { display:flex; gap:10px; align-items:center; margin-top:12px; }
-  .dot { width:10px; height:10px; border-radius:20px; background:rgba(0,0,0,0.12); cursor:pointer; }
-  .dot.active { background: linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-
-  .btn { padding:10px 14px; border-radius:12px; border:none; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#041321; font-weight:700; cursor:pointer; box-shadow: 0 8px 28px rgba(12,18,40,0.07); }
-  .link-ghost { padding:10px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.06); background:transparent; color:#333; cursor:pointer; font-weight:700; }
-
-  /* small responsive tweaks */
-  @media (max-width:520px){
-    .avatar{ width:56px; height:56px; flex:0 0 56px; border-radius:12px; }
-    .impact-icon{ width:48px; height:48px; flex:0 0 48px; border-radius:12px; }
-  }
-
-  /* subtle entrance */
-  .reveal{ transform: translateY(6px); opacity:0; animation:enter 520ms forwards; }
-  .reveal.delay{ animation-delay:120ms; }
-  @keyframes enter{ to{ transform:none; opacity:1; } }
-
-  /* keep original testimonial-box style available as fallback */
-  .testimonial-box { width:320px; background:#ffffff; border:1px solid #e0e0e0; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
-  .testimonial-box:hover{ transform:translateY(-5px); }
-  .testimonial-text{ font-size:1rem; line-height:1.5; color:#444; }
-  .testimonial-author{ margin-top:15px; font-weight:600; text-align:right; color:#333; }
 </style>
 </head>
 <body>
-<!-- Testimonial Popup -->
+
+<!-- MAGIC CANVAS -->
+<div id="magic-canvas"></div>
+
+<!-- CURSOR (desktop only) -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- POPUP -->
 <div id="testimonialPopup" class="popup-overlay">
   <div class="popup-box">
-    <h2>Submit a Testimonial</h2>
-
-    <form id="testimonialForm" action="https://formsubmit.co/ridhima7229@gmail.com" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="text" name="role" placeholder="Designation / How you know me">
-      <textarea name="testimonial" placeholder="Write your testimonial..." required></textarea>
-
+    <h2>Leave a note <span>♡</span></h2>
+    <form action="https://formsubmit.co/ridhima7229@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your name ✨" required>
+      <input type="text" name="role" placeholder="How you know me 🌸">
+      <textarea name="testimonial" placeholder="Write something sweet here 💌" required></textarea>
       <input type="hidden" name="_captcha" value="false">
-
-      <!-- Optional redirect after submit -->
-      <!-- <input type="hidden" name="_next" value="https://ridhima-sharma09.github.io/My-Portfolio-/thankyou.html"> -->
-
-      <button type="submit">Submit</button>
-      <button type="button" id="closePopup" class="close-btn">Close</button>
+      <div class="popup-btns">
+        <button type="submit" class="pb-sub">Send ♡</button>
+        <button type="button" id="closePopup" class="pb-cls">Close</button>
+      </div>
     </form>
   </div>
 </div>
 
-  <header>
-    <h1>Ridhima Sharma</h1>
-    <p>• Student • Developer • Realism art enthusiast • JEE Aspirant</p>
-  </header>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ridhima Sharma</div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#origin">origin</a>
+    <a href="#projects">projects</a>
+    <a href="#skills">skills</a>
+    <a href="#impact">impact</a>
+    <a href="#contact-wrap">contact</a>
+  </div>
+</nav>
 
-  <section>
-    <h2>Introduction</h2>
-    <p>Hi, I’m Ridhima Sharma, a 16-year-old student, developer and I’ve always been unapologetically curious about everything around me. I’m also passionate about philosophical books and collecting thought-provoking quotes and I love to draw realistic portraits as a hobby. I’ve been preparing for JEE for the past four years and that journey has shaped the way I think—structured, analytical, and driven by the need to understand things deeply rather than just accept them.</p>
-    <p>I have a deep love for chemistry. I enjoy the logic behind reactions, the patterns hidden inside concepts and the way it connects the microscopic world to real life. It’s one of the few subjects that feels like both science and art to me.</p>
-  </section>
-
-  <section>
-    <h2>Academic Journey</h2>
-    <p>My academic journey has always been shaped by curiosity, consistency and a genuine love for learning. Throughout school, I’ve been known as the student who asks one more question, solves one more problem and dives a little deeper than expected.</p>
-    <p>I was consistently among the top 5 students in my school, finishing Class 10 with a CGPA of 9.38 . Entering Class 11, I continued the same momentum—achieving academic excellence again, becoming one of the top scorers in Chemistry and once more securing a place in the top 5.</p>
-    <p>Alongside chemistry, I’ve spent the last four years preparing for JEE, which has strengthened my discipline, focus and resilience. Beyond academics, I’ve always been a bright, reflective pupil, someone who loves philosophical conversations, meaningful books and deep thinking. I journal regularly, using it as a way to process ideas, track growth and understand myself better.</p>
-  </section>
-
-  <section>
-    <h2>What Sparked My Interest</h2>
-    <p>The foundations of my academic direction were set in 9th grade, when I participated in a school-level mathematics quiz competition and secured 2nd rank. It sparked a deep curiosity for advanced mathematics and computing, pushing me to explore ideas beyond the classroom.</p>
-    <p>I became an active member of my school’s Science Club and Cyber Security Club, which exposed me to new concepts and perspectives. Through the Cyber Security Club, I attended my first webinar on cyber security, AI, and software development. These early experiences laid the roots of my academic journey and fuel the curiosity, passion, and dedication I bring into everything I learn and build.</p>
-  </section>
-
-  <section>
-    <h2>Projects</h2>
-
-    <div class="project">
-      <h3>📖 The Last Bookmark — AI-Powered Journal App</h3>
-      <p>A quiet corner for reflection. Built with Python & Tkinter, this journal-inspired app blends simple journaling with gentle wisdom through meaningful quotes. Dedicated to my teacher who sparked my love for philosophy and introspection.</p>
-      <ul>
-        <li>25 handpicked, thoughtful quotes</li>
-        <li>“Today’s Thought” — daily journaling space</li>
-        <li>Vintage, crinkly-paper UI</li>
-        <li>Auto-save thoughts across sessions</li>
-        <li>AI-ready for future personalized suggestions</li>
-      </ul>
-      <p>💻 <strong>Tech Stack:</strong> Python, Tkinter, GUI</p>
-      <p>🔗 <a href="https://github.com/Ridhima-sharma09/The-Last-Bookmark" target="_blank">GitHub Repository</a></p>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag-line">Delhi · Class XII Boards · 2025</div>
+    <h1 class="hero-name">
+      Ridhima
+      <em>Sharma</em>
+    </h1>
+    <p class="hero-subtitle">
+      Student. Developer. Poet by heart.<br>
+      Realist artist. JEE aspirant.<br>
+      Unapologetically curious — always. 🌙
+    </p>
+    <div class="hero-pills">
+      <span class="hero-pill hp-lav">🐍 Python</span>
+      <span class="hero-pill hp-rose">🎨 Portrait Art</span>
+      <span class="hero-pill hp-mint">⚗️ Chemistry</span>
+      <span class="hero-pill hp-gold">📖 Philosophy</span>
+      <span class="hero-pill hp-lav">✏️ JEE Prep</span>
+      <span class="hero-pill hp-rose">💌 Journaling</span>
     </div>
-
-    <div class="project">
-      <h3>🖤 Dark Mode GUI Calculator</h3>
-      <p>A clean, modern calculator built with Python’s Tkinter library. Smooth usability, minimal design, and responsive buttons.</p>
-      <ul>
-        <li>Dark Mode UI for a modern look</li>
-        <li>Fully functional basic calculator</li>
-        <li>Responsive buttons</li>
-        <li>Clean layout with Tkinter grids</li>
-      </ul>
-      <p>💻 <strong>Tech Stack:</strong> Python, Tkinter</p>
-      <p>🔗 <a href="https://github.com/Ridhima-sharma09/Tkinter-Calculator" target="_blank">GitHub Link</a></p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-main">View my work ✨</a>
+      <a href="mailto:ridhima7227@gmail.com" class="btn-soft">Say hello ♡</a>
     </div>
-
-    <div class="project">
-      <h3>💊 PharmEase — Pharmacy Management System</h3>
-      <p>Organized, efficient, and practical pharmacy management system using Python, CSV, and OpenPyXL for Excel integration.</p>
-      <ul>
-        <li>Add, update, manage medicine records</li>
-        <li>Track stock levels, purchase history, availability</li>
-        <li>Expiration date management</li>
-        <li>CSV-based quick data handling</li>
-        <li>Excel integration with OpenPyXL</li>
-      </ul>
-      <p>💻 <strong>Tech Stack:</strong> Python, csv, openpyxl</p>
-      <p>🔗 <a href="https://github.com/Ridhima-sharma09/PharmaEase" target="_blank">GitHub Link</a></p>
+  </div>
+  <div class="hero-right">
+    <div class="diary-card">
+      <div class="diary-lines">
+        <div class="diary-line">
+          <div class="diary-date">✦ about me — 2025</div>
+          <div class="diary-entry">I'm <strong>17</strong>, from Delhi. I solve physics on weekdays and journal on weekends — sometimes both at midnight. 🌙</div>
+        </div>
+        <div class="diary-line">
+          <div class="diary-date">✦ what drives me</div>
+          <div class="diary-entry">Chemistry feels like science <em>and</em> art. Code feels like poetry. I find beauty in both worlds. ✨</div>
+        </div>
+        <div class="diary-line">
+          <div class="diary-date">✦ anne frank said —</div>
+          <div class="diary-entry"><em>"I want to go on living even after my death."</em> I want my work to speak long after this page closes.</div>
+        </div>
+      </div>
+      <div class="diary-stat-row">
+        <div class="diary-stat">
+          <div class="diary-stat-num">9.38</div>
+          <div class="diary-stat-lbl">Cl. 10 CGPA</div>
+        </div>
+        <div class="diary-stat" style="background:var(--rose)">
+          <div class="diary-stat-num">Top 5</div>
+          <div class="diary-stat-lbl">In school</div>
+        </div>
+        <div class="diary-stat" style="background:var(--gold)">
+          <div class="diary-stat-num">4 yrs</div>
+          <div class="diary-stat-lbl">JEE prep</div>
+        </div>
+        <div class="diary-stat" style="background:var(--mint)">
+          <div class="diary-stat-num">3+</div>
+          <div class="diary-stat-lbl">Projects</div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-  </section>
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,15 1440,20 L1440,40 L0,40 Z" fill="#fff0f8"/></svg></div>
 
-  <!-- ===== Glassmorphism: Giving Back to the Community ===== -->
-  <section class="glass-section reveal" id="giving-back">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px">
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">About me</div>
+      <div class="sec-title">The girl who asks<br><em>one more question</em> 🌸</div>
+    </div>
+    <div class="about-layout up">
+      <div class="about-text">
+        <p>Hi! I'm <strong>Ridhima Sharma</strong>, a 17-year-old student, developer, and poet from Delhi. I've always been <em>unapologetically curious</em> — from the logic tucked inside organic chemistry to the philosophy hidden between book pages.</p>
+        <p>I've spent <strong>four years preparing for JEE</strong>, and that journey reshaped how I think: structured, analytical, and driven to understand things deeply rather than just skim the surface. I'm currently giving my <strong>Class 12 boards</strong> as a consistent top scorer in Chemistry.</p>
+        <p>Alongside equations, I sketch <strong>realistic portraits</strong> (a hobby since literally my birth year), journal my thoughts in ink, and collect quotes that quietly rearrange how I see the world.</p>
+        <p>Anne Frank wrote <em>"I want to go on living even after my death."</em> I think about that often. I want every project, every line of code, every word I write to carry something real and lasting. 🌙</p>
+      </div>
+      <div class="stat-masonry">
+        <div class="stat-tall">
+          <div class="stat-tall-num">9.38</div>
+          <div class="stat-tall-lbl">Class 10 CGPA</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-mini">
+            <div class="stat-mini-num">Top 5</div>
+            <div class="stat-mini-lbl">In school always</div>
+          </div>
+          <div class="stat-mini" style="background:var(--rose)">
+            <div class="stat-mini-num">4 yrs</div>
+            <div class="stat-mini-lbl">JEE preparation</div>
+          </div>
+          <div class="stat-mini" style="background:var(--gold)">
+            <div class="stat-mini-num">3+</div>
+            <div class="stat-mini-lbl">Projects shipped</div>
+          </div>
+          <div class="stat-mini" style="background:var(--mint)">
+            <div class="stat-mini-num">Class XII</div>
+            <div class="stat-mini-lbl">Boards 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,15 C480,40 960,0 1440,22 L1440,40 L0,40 Z" fill="#fff0f8"/></svg></div>
+
+<!-- ══ ORIGIN STORY ══ -->
+<section id="origin">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">What sparked my interest</div>
+      <div class="sec-title">From pencil sketches<br>to <em>lines of code</em> 🎨</div>
+    </div>
+    <div class="origin-layout up">
+      <div class="origin-visual">
+        <div class="origin-canvas">
+          <div class="sketch-line">
+            <div class="sketch-icon">✏️</div>
+            <div class="sketch-text">Age 7 — I started drawing <strong>realistic portraits</strong>. I'd sit for hours, studying how light falls on a cheekbone, how a shadow tells a story.</div>
+          </div>
+          <div class="origin-arrow">↓</div>
+          <div class="sketch-line">
+            <div class="sketch-icon">🧪</div>
+            <div class="sketch-text">Class 9 — Science Club & Cybersecurity Club opened the door. My first <strong>webinar on AI and software development</strong> left me electric with possibility.</div>
+          </div>
+          <div class="origin-arrow">↓</div>
+          <div class="sketch-line">
+            <div class="sketch-icon">💻</div>
+            <div class="sketch-text">First Python project — and I realised: <strong>code is just another kind of drawing</strong>. Different tools, same eye for detail and same desire to make something real.</div>
+          </div>
+          <div class="origin-arrow">↓</div>
+          <div class="sketch-line">
+            <div class="sketch-icon">🌸</div>
+            <div class="sketch-text">Today — building <strong>apps people actually use</strong>: a journal for stressed students, a tracker for pharmacies. The artist and the developer are the same person.</div>
+          </div>
+        </div>
+      </div>
+      <div class="origin-text">
+        <p>People often assume that moving from art to technology is a departure — like trading one world for another. For me, it never felt that way. It felt like an <em>extension</em>.</p>
+        <p>When I was drawing portraits, I was learning how to <strong>observe carefully</strong>, how to be patient with details, how to keep iterating until something felt true. When I started coding, I found those same instincts waiting for me there.</p>
+        <p>The sketch of a face and the structure of a Python function both demand the same thing: that you look closely, think deliberately, and care about what you're making.</p>
+        <p>In Class 9, attending my first <strong>cybersecurity and AI webinar</strong> through school's Science Club was the spark. I remember thinking — this is a language I want to learn. Not instead of drawing, but alongside it.</p>
+        <p>The Last Bookmark was born from that crossroads — a journaling app that thinks like a poet and works like a programmer. <em>Soft on the outside, precise on the inside.</em></p>
+        <div class="origin-quote">
+          Coding never replaced my pencil. It just gave me a second one — one that could reach more people, solve real problems, and leave something behind that lasts.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,25 C360,5 720,38 1080,12 C1260,2 1380,28 1440,18 L1440,40 L0,40 Z" fill="#fdf8ff"/></svg></div>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">Projects</div>
+      <div class="sec-title">Things I've<br><em>actually built</em> 💜</div>
+    </div>
+    <div class="proj-stagger up">
+
+      <div class="proj-card">
+        <div class="proj-head" onclick="toggleProj(this)">
+          <div class="proj-emoji">📖</div>
+          <span class="proj-name">The Last Bookmark</span>
+          <div class="proj-chips"><span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">AI-Ready</span></div>
+          <span class="proj-arr">↓</span>
+        </div>
+        <div class="proj-body open">
+          <div class="proj-inner">
+            <div>
+              <p class="proj-desc">A quiet corner for reflection 🌙 Built with Python & Tkinter, this journal-inspired app blends simple journaling with 25 handpicked philosophical quotes. Dedicated to my teacher Ms. Shivani Sharma who first taught me that reflection is a superpower. <strong>♡</strong></p>
+              <div class="proj-link"><a href="https://github.com/Ridhima-sharma09/The-Last-Bookmark" target="_blank" rel="noopener">View on GitHub ✨</a></div>
+            </div>
+            <ul class="feat-list">
+              <li>25 handpicked, thoughtful quotes</li>
+              <li>"Today's Thought" daily journaling</li>
+              <li>Vintage crinkled-paper UI</li>
+              <li>Auto-save thoughts across sessions</li>
+              <li>AI-ready for future suggestions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-head" onclick="toggleProj(this)">
+          <div class="proj-emoji">💊</div>
+          <span class="proj-name">PharmEase</span>
+          <div class="proj-chips"><span class="chip">Python</span><span class="chip">OpenPyXL</span><span class="chip">CSV</span></div>
+          <span class="proj-arr">↓</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-inner">
+            <div>
+              <p class="proj-desc">A practical pharmacy management system deployed at <strong>3 local pharmacies</strong> to track expiry dates, manage stock, and cut daily manual errors — real-world impact from a student's desk! ✨</p>
+              <div class="proj-link"><a href="https://github.com/Ridhima-sharma09/PharmaEase" target="_blank" rel="noopener">View on GitHub ✨</a></div>
+            </div>
+            <ul class="feat-list">
+              <li>Add, update & manage medicine records</li>
+              <li>Track stock, history & availability</li>
+              <li>Expiration date monitoring</li>
+              <li>CSV-based quick data handling</li>
+              <li>Excel integration via OpenPyXL</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-head" onclick="toggleProj(this)">
+          <div class="proj-emoji">🖤</div>
+          <span class="proj-name">Dark Mode Calculator</span>
+          <div class="proj-chips"><span class="chip">Python</span><span class="chip">Tkinter</span></div>
+          <span class="proj-arr">↓</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-inner">
+            <div>
+              <p class="proj-desc">A clean, minimal dark-mode calculator — classmates and teachers reach for it during tests and lab sessions. Small tool, quietly helpful. Sometimes the simplest things matter most. ✨</p>
+              <div class="proj-link"><a href="https://github.com/Ridhima-sharma09/Tkinter-Calculator" target="_blank" rel="noopener">View on GitHub ✨</a></div>
+            </div>
+            <ul class="feat-list">
+              <li>Sleek Dark Mode UI</li>
+              <li>Fully functional calculator</li>
+              <li>Responsive smooth interactions</li>
+              <li>Clean Tkinter grid layout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,10 C480,38 960,4 1440,24 L1440,40 L0,40 Z" fill="#ede4ff"/></svg></div>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">Skills & Expertise</div>
+      <div class="sec-title">What I bring<br>to the <em>table</em> 🌟</div>
+    </div>
+    <div class="skills-grid up">
+      <div class="skill-card">
+        <span class="skill-ico">💻</span>
+        <div class="skill-name">Technical</div>
+        <ul class="skill-items">
+          <li>Python (Core + OOP)</li>
+          <li>Tkinter GUI Development</li>
+          <li>SQL Basics</li>
+          <li>CSV & Excel (OpenPyXL)</li>
+          <li>Basic AI/ML Concepts</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <span class="skill-ico">📚</span>
+        <div class="skill-name">Academic</div>
+        <ul class="skill-items">
+          <li>Chemistry — consistent top scorer ⚗️</li>
+          <li>Organic, Inorganic & Physical Chem</li>
+          <li>JEE-level Mathematics</li>
+          <li>Logical reasoning & analysis</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <span class="skill-ico">🎨</span>
+        <div class="skill-name">Creative</div>
+        <ul class="skill-items">
+          <li>Realistic portrait drawing 🖌️</li>
+          <li>Madhubani traditional art</li>
+          <li>Aesthetic UI thinking</li>
+          <li>Storytelling & writing ✍️</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <span class="skill-ico">🌸</span>
+        <div class="skill-name">Soft Skills</div>
+        <ul class="skill-items">
+          <li>Deep focus & consistency</li>
+          <li>Fast learner, strong curiosity</li>
+          <li>Clear communicator</li>
+          <li>Detail-oriented & emotionally aware</li>
+          <li>Long-term independent project work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,28 C360,8 720,40 1080,14 C1260,4 1380,30 1440,12 L1440,40 L0,40 Z" fill="#fdf8ff"/></svg></div>
+
+<!-- ══ IMPACT ══ -->
+<section id="impact">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">Community Impact</div>
+      <div class="sec-title">Where kindness<br><em>comes full circle</em> 💕</div>
+    </div>
+    <div class="bento up">
+      <div class="bento-card bc-lav">
+        <div class="bento-ico">🌸</div>
+        <div class="bento-num">~20</div>
+        <div class="bento-lbl">Classmates Reached</div>
+        <div class="bento-sub">Used The Last Bookmark during exam season to process stress and feel calmer through guided prompts.</div>
+      </div>
+      <div class="bento-card bc-rose">
+        <div class="bento-ico">📝</div>
+        <div class="bento-num">50+</div>
+        <div class="bento-lbl">Journal Entries Logged</div>
+        <div class="bento-sub">Private, local-first — no ads, no tracking. Designed to respect privacy from the very beginning.</div>
+      </div>
+      <div class="bento-card bc-gold">
+        <div class="bento-ico">💊</div>
+        <div class="bento-num">3</div>
+        <div class="bento-lbl">Pharmacies Onboarded</div>
+        <div class="bento-sub">PharmEase deployed at 3 local pharmacies, tracking ~80 medicines & reducing errors daily.</div>
+      </div>
+      <div class="bc-wide">
+        <div>
+          <div class="wide-col-title">📖 The Last Bookmark</div>
+          <div class="wide-col-head">Student Mental Health</div>
+          <div class="wide-col-body">Built as a safe journaling space inspired by Ms. Shivani Sharma. Classmates used it during exams and reported guided prompts helped them slow down and feel calmer.</div>
+        </div>
+        <div>
+          <div class="wide-col-title">💊 PharmEase</div>
+          <div class="wide-col-head">Pharmacy Workflow</div>
+          <div class="wide-col-body">Staff reported fewer manual errors and clearer daily stock reconciliation thanks to the Excel-integrated expiry tracking system built with OpenPyXL.</div>
+        </div>
+        <div>
+          <div class="wide-col-title">🖤 Calculator</div>
+          <div class="wide-col-head">Ad-Free Tool</div>
+          <div class="wide-col-body">A distraction-free calculator quietly used by classmates and teachers during tests and lab sessions. Small tools, sincerely helpful.</div>
+        </div>
+      </div>
+      <div class="honest-note">
+        <div class="honest-icon">🤍</div>
+        <div class="honest-text"><strong>Honesty first —</strong> all numbers above are estimates generated from CSV & OpenPyXL records. A full backend database has not yet been integrated, but it is on the roadmap and coming soon. We believe transparency matters more than impressive-looking stats. ✨</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,18 C360,38 720,2 1080,26 C1260,36 1380,10 1440,20 L1440,40 L0,40 Z" fill="#fff0f8"/></svg></div>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:18px" class="up">
       <div>
-        <div class="kicker">Giving Back • Community Impact</div>
-        <h2 style="margin-top:6px;color:#ff6f61">Where Kindness Comes Full Circle</h2>
-        <p class="glass-sub" style="margin-top:8px;color:#555">Every act of giving creates a ripple that reaches far beyond what we see. This section highlights how your contributions make a difference and come back to inspire more kindness.Small tools, real effects — stories from classmates, pharmacy staff, and the people who used these projects.</p>
+        <div class="sec-eyebrow">Testimonials</div>
+        <div class="sec-title" style="margin-bottom:0">Voices behind<br>the <em>experience</em> 💌</div>
       </div>
+      <button class="btn-soft" id="shareBtn">Leave a note ♡</button>
     </div>
+    <div class="testi-layout up">
 
-    <div class="glass-row" style="margin-top:14px">
-      <!-- Left column: The Last Bookmark + PharmEase -->
-      <div class="glass-card">
-        <h3 style="margin-top:0">Your Most Recent Bookmark in Action (student mental health)</h3>
-        <p style="color:#444;margin-top:6px">Built as a safe journaling space inspired by Ms. Shivani Sharma, who encouraged reflection and deep thinking. Classmates used the app around exam time and reported that short guided prompts helped them process stress and feel calmer.</p>
-
-        <div class="impact-list" style="margin-top:12px">
-          <div class="impact-item">
-            <div class="impact-icon">JB</div>
-            <div class="impact-content">
-              <h4>Emotional support</h4>
-              <p>Short prompts & a private writing space helped students slow down during high-stress periods.</p>
-            </div>
-          </div>
-
-          <div class="impact-item">
-            <div class="impact-icon">PS</div>
-            <div class="impact-content">
-              <h4>Privacy-first</h4>
-              <p>No ads and local-first storage (export optional) — designed to respect user privacy.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="metrics" aria-hidden="true">
-          <div class="metric"><span>~20</span><label>classmates reached</label></div>
-          <div class="metric"><span>50+</span><label>entries logged</label></div>
-        </div>
-
-        <div style="margin-top:12px;color:#6b6b6b;font-size:13px">Information: The figures shown are approximations. Accurate counts will be available after backend database integration is implemented.</div>
-      </div>
-
-      <!-- Right column: PharmEase + Calculator -->
-      <div class="glass-card reveal delay">
-        <h3 style="margin-top:0">💊 PharmEase — Pharmacy assistant (workflow)</h3>
-        <p style="color:#444;margin-top:6px">A small, practical tool given to local pharmacies to help track expiry dates and stock. Staff used the expiry tracker and reported fewer manual errors and clearer daily reconciliation.</p>
-
-        <div class="impact-list" style="margin-top:12px">
-          <div class="impact-item">
-            <div class="impact-icon">OC</div>
-            <div class="impact-content">
-              <h4>Expiry monitoring</h4>
-              <p>Color-Excel integration with OpenPyXL for list.</p>
-            </div>
-          </div>
-
-          <div class="impact-item">
-            <div class="impact-icon">✓</div>
-            <div class="impact-content">
-              <h4>Less manual error</h4>
-              <p>Reduced mistakes during stock counts and faster reconciliation.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="metrics" aria-hidden="true">
-          <div class="metric"><span>3</span><label>pharmacies helped</label></div>
-          <div class="metric"><span>~80</span><label>meds tracked</label></div>
-        </div>
-
-        <div style="margin-top:12px;color:#6b6b6b;font-size:13px">Note: The figures shown here are estimates, generated via OpenPyXL, Excel, and CSV files. Final numbers may vary once full backend integration is implemented..</div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px" class="glass-card">
-      <h3 style="margin-top:0">🖤 Dark Mode GUI Calculator</h3>
-      <p style="color:#444;margin-top:6px">A focused, ad-free calculator that classmates and teachers used during tests and lab sessions — simple tools sometimes save the most time.</p>
-      <div style="margin-top:8px;color:#666;font-size:13px">Small tools, quietly helpful — these projects reflect care for people and real use over purely technical complexity.</div>
-    </div>
-  </section>
-
-  <!-- ===== Glassmorphism: Testimonials ===== -->
-  <section class="glass-section reveal" id="testimonials-glass" aria-label="Testimonials">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;">
-      <div>
-        <div class="kicker">Testimonials • Credibility</div>
-        <h2 style="margin-top:6px;color:#ff6f61">The Voices Behind the Experience</h2>
-        <p class="glass-sub" style="margin-top:8px;color:#555">Short, authentic reflections from classmates, teachers, and a local pharmacy owner.Timeless reflections from individuals whose moments aligned with my work</p>
-      </div>
-    </div>
-
-    <div class="glass-row" style="margin-top:14px">
-      <!-- Carousel column -->
-      <div class="glass-card">
-        <div class="testimonials-wrap">
-          <div class="carousel" aria-roledescription="carousel" aria-label="User testimonials">
-            <div class="slides" id="slides">
-              <!-- Slide 1 -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">EA</div>
-                  <div class="quote">
-                    <p>"This app feels like a warm reminder of my teacher’s inspiration. It lifts my mood and helps melt my stress every time I use it."</p>
-                    <div class="author">— Ekanshi A.</div>
-                    <div class="meta">Classmate • The Last Bookmark</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 2 -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">SJ</div>
-                  <div class="quote">
-                    <p>"Ridhima's app genuinely helped me during exam time. It felt calming and personal. It’s become a real stress-buster for me — like a safe space."</p>
-                    <div class="author">— Shivam J.</div>
-                    <div class="meta">Peer • The Last Bookmark</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 3 -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">PO</div>
-                  <div class="quote">
-                    <p>"PharmEase made our daily work so much easier. The expiry tracker saved us from making mistakes."</p>
-                    <div class="author">— Pharmacy Owner</div>
-                    <div class="meta">Vivek Vihar • PharmEase</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Slide 4 -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">AS</div>
-                  <div class="quote">
-                    <p>"I saw her closely observe the real-life problems faced in pharmacy management and work hard to solve them through PharmaEase. The app is a practical and thoughtful solution that simplifies daily operations and reflects a strong understanding of real-world needs."</p>
-                    <div class="author">— Aarush S.</div>
-                    <div class="meta">pharmaease • peer</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Slide 5 -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">AL</div>
-                  <div class="quote">
-                    <p>"Those bookmarks... are subtle, expressive, and quietly powerful. Each holds a thought that lingers"</p>
-                    <div class="author">— Anshesh L.</div>
-                    <div class="meta">Last bookmark • classmate</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Slide 6: Teacher -->
-              <div class="slide">
-                <div class="testimonial-card">
-                  <div class="avatar">AS</div>
-                  <div class="quote">
-                    <p>"As a mathematics enthusiast, tough calculations had been my hinderance to get better results in less time, but my comrade's calculator, proved to be a boon for me as if it just shortened my path to success."</p>
-                    <div class="author">— Arnav S.</div>
-                    <div class="meta">peer • Calculator</div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="controls" role="tablist" aria-label="Testimonial controls" style="align-items:center;">
-            <div class="dot active" data-index="0" aria-controls="slides" aria-label="Slide 1"></div>
-            <div class="dot" data-index="1" aria-controls="slides" aria-label="Slide 2"></div>
-            <div class="dot" data-index="2" aria-controls="slides" aria-label="Slide 3"></div>
-            <div class="dot" data-index="3" aria-controls="slides" aria-label="Slide 4"></div>
-            <div class="dot" data-index="4" aria-controls="slides" aria-label="Slide 5"></div>
-            <div class="dot" data-index="5" aria-controls="slides" aria-label="Slide 6"></div>
-
-            <div style="flex:1"></div>
-
-            <button class="link-ghost" id="shareBtn">Share your story</button>
-            <button class="btn" id="ctaGit">View projects</button>
-          </div>
-
-          <div style="margin-top:10px;color:#666;font-size:13px">Please note: Headshot photos are not provided to protect privacy, and some individuals featured are under 18.</div>
+      <div class="testi-card featured">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">I saw her closely observe the real-life problems faced in pharmacy management and work hard to solve them through PharmaEase. The app is a practical and thoughtful solution that simplifies daily operations and reflects a strong understanding of real-world needs.</p>
+        <div class="testi-author">
+          <div class="testi-av">AS</div>
+          <div><div class="testi-name">Aarush S.</div><div class="testi-role">Peer · PharmEase</div></div>
         </div>
       </div>
 
-      <!-- Right column: quick metrics & CTA -->
-      <div class="glass-card reveal delay">
-        <h3 style="margin-top:0">Credibility at a glance</h3>
-        <p style="color:#444;margin-top:6px">Please note: The numbers shown are estimated and generated using OpenPyXL and CSV files. A full backend database is not yet integrated.</p>
-
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
-          <div style="display:flex;justify-content:space-between;gap:12px">
-            <div style="flex:1">
-              <div style="font-weight:700;font-size:20px">4.9/5</div>
-              <div style="color:#666;font-size:13px">average satisfaction</div>
-            </div>
-            <div style="flex:1">
-              <div style="font-weight:700;font-size:20px">3</div>
-              <div style="color:#666;font-size:13px">pharmacies onboarded</div>
-            </div>
-          </div>
-
-          <div style="display:flex;gap:12px;align-items:center">
-            <div style="flex:1">
-              <div style="font-weight:700;font-size:20px">20+</div>
-              <div style="color:#666;font-size:13px">classmates reached</div>
-            </div>
-            <div style="flex:1">
-              <div style="font-weight:700;font-size:20px">50+</div>
-              <div style="color:#666;font-size:13px">journal entries</div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px;color:#6b6b6b;font-size:13px">backend will be intregrated soon for maximum effect and statics.</div>
-
-          <div style="margin-top:14px;display:flex;gap:12px;">
-            <button class="btn" id="downloadCV">Download CV</button>
-            <button class="link-ghost" id="contactMe">Contact</button>
-          </div>
+      <div class="testi-card">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">This app feels like a warm reminder of my teacher's inspiration. It lifts my mood and helps melt my stress every time I use it.</p>
+        <div class="testi-author">
+          <div class="testi-av">EA</div>
+          <div><div class="testi-name">Ekanshi A.</div><div class="testi-role">Classmate · The Last Bookmark</div></div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- rest of your content (Skills, Activities, Social links, Contact) -->
-  <section>
-    <h2>Skills & Expertise</h2>
+      <div class="testi-card">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">Ridhima's app genuinely helped me during exam time. It felt calming and personal — like a safe space where stress could breathe out.</p>
+        <div class="testi-author">
+          <div class="testi-av">SJ</div>
+          <div><div class="testi-name">Shivam J.</div><div class="testi-role">Peer · The Last Bookmark</div></div>
+        </div>
+      </div>
 
-    <div class="skill">
-      <h3>💻 Technical Skills</h3>
-      <ul>
-        <li>Python (Core + OOP)</li>
-        <li>Tkinter (GUI Development)</li>
-        <li>SQL Basics</li>
-        <li>CSV & Excel Automation (OpenPyXL)</li>
-        <li>Basic AI/ML Concepts</li>
-      </ul>
-    </div>
+      <div class="testi-card">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">PharmEase made our daily work so much easier. The expiry tracker saved us from making costly mistakes.</p>
+        <div class="testi-author">
+          <div class="testi-av">PO</div>
+          <div><div class="testi-name">Pharmacy Owner</div><div class="testi-role">Vivek Vihar · PharmEase</div></div>
+        </div>
+      </div>
 
-    <div class="skill">
-      <h3>📚 Academic Expertise</h3>
-      <ul>
-        <li>Strong foundation in Chemistry (Top scorer)</li>
-        <li>Advanced understanding of Organic, Inorganic & Physical Chemistry</li>
-        <li>JEE-level Mathematics (Algebra, Calculus, Coordinate Geometry)</li>
-        <li>Logical reasoning & analytical problem-solving</li>
-      </ul>
-    </div>
+      <div class="testi-card">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">Those bookmarks are subtle, expressive, and quietly powerful. Each holds a thought that lingers long after you close the app.</p>
+        <div class="testi-author">
+          <div class="testi-av">AL</div>
+          <div><div class="testi-name">Anshesh L.</div><div class="testi-role">Classmate · The Last Bookmark</div></div>
+        </div>
+      </div>
 
-    <div class="skill">
-      <h3>🎨 Creative Skills</h3>
-      <ul>
-        <li>Realistic portrait drawing (since 2009 — literally my birth year)</li>
-        <li>Aesthetic UI thinking</li>
-        <li>Storytelling & writing</li>
-        <li>Designing meaningful, reflective digital experiences</li>
-      </ul>
-    </div>
+      <div class="testi-card">
+        <div class="testi-qmark">"</div>
+        <p class="testi-text">Tough calculations were a constant hindrance — but her calculator proved to be a boon. It literally shortened my path to success.</p>
+        <div class="testi-author">
+          <div class="testi-av">AR</div>
+          <div><div class="testi-name">Arnav S.</div><div class="testi-role">Peer · Calculator</div></div>
+        </div>
+      </div>
 
-    <div class="skill">
-      <h3>🌐 Soft Skills</h3>
-      <ul>
-        <li>Deep focus & consistency (4 years of JEE prep)</li>
-        <li>Fast learner with strong curiosity</li>
-        <li>Clear communicator</li>
-        <li>Detail-oriented & emotionally aware</li>
-        <li>Ability to work independently on long-term projects</li>
-      </ul>
     </div>
-  </section>
+    <p style="font-size:11px;color:var(--muted);margin-top:14px;font-family:var(--ff-jose);letter-spacing:.06em">✦ Photos not shown to protect privacy. Some individuals are under 18.</p>
+  </div>
+</section>
 
-  <section>
-    <h2>Activities & Clubs</h2>
-    <div class="activity">
-      <h3>🔐 Cybersecurity Club</h3>
-      <p>Attended workshops, webinars, and training sessions on ethical hacking, penetration testing basics, and defensive security. Cultivated problem-solving and critical thinking.</p>
-    </div>
-    <div class="activity">
-      <h3>🧪 Science Club</h3>
-      <p>Participated in exhibitions, model-making events, and small experiments. Built teamwork, research discipline, and structured problem-solving skills.</p>
-    </div>
-    <div class="activity">
-      <h3>🎨 Madhubani Art</h3>
-      <p>Created meaningful artwork that still hangs in school. Symbolizes patience, attention to detail, and preserving cultural expression.</p>
-    </div>
-    <div class="activity">
-      <h3>💃🎶 Dance & Music Competitions</h3>
-      <p>Participated in district & zonal competitions. Learned confidence, discipline, and self-expression through performing arts.</p>
-    </div>
-  </section>
+<div class="ribbon"><svg viewBox="0 0 1440 40" preserveAspectRatio="none" height="40"><path d="M0,30 C480,5 960,40 1440,10 L1440,40 L0,40 Z" fill="#fff0f8"/></svg></div>
 
-  <section>
-    <h2>Social Media & Online Presence</h2>
-    <p>🔗 <a href="https://www.linkedin.com/in/ridhima-sharma-b3334b390/" target="_blank">LinkedIn</a> | 🐙 <a href="https://github.com/Ridhima-sharma09" target="_blank">GitHub</a></p>
-  </section>
+<!-- ══ ACTIVITIES ══ -->
+<section id="activities">
+  <div class="wrap">
+    <div class="up">
+      <div class="sec-eyebrow">Activities & Clubs</div>
+      <div class="sec-title">Beyond the<br><em>classroom</em> 🌟</div>
+    </div>
+    <div class="act-grid up">
+      <div class="act-card">
+        <div class="act-ico">🔐</div>
+        <div class="act-name">Cybersecurity Club</div>
+        <p class="act-desc">Attended workshops and webinars on ethical hacking, penetration testing basics, and defensive security. The webinar on AI & software development was the moment everything clicked for me. 💪</p>
+      </div>
+      <div class="act-card">
+        <div class="act-ico">🧪</div>
+        <div class="act-name">Science Club</div>
+        <p class="act-desc">Participated in exhibitions, model-making events, and experiments. Built teamwork, research discipline, and structured problem-solving skills that I carry into every project. ⚗️</p>
+      </div>
+      <div class="act-card">
+        <div class="act-ico">🎨</div>
+        <div class="act-name">Madhubani Art</div>
+        <p class="act-desc">Created meaningful traditional artwork that still hangs in school. A reminder that patience, cultural memory, and attention to detail are skills that never expire. ✨</p>
+      </div>
+      <div class="act-card">
+        <div class="act-ico">💃</div>
+        <div class="act-name">Dance & Music</div>
+        <p class="act-desc">Participated in district & zonal competitions. Learned confidence, discipline, and self-expression through performing arts — things no textbook quite teaches. 🎶</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ridhima7227@gmail.com">ridhima7227@gmail.com</a></p>
-  </section>
+<!-- ══ CONTACT ══ -->
+<div id="contact-wrap">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="up">
+        <div class="sec-eyebrow" style="color:var(--ink2)">Contact</div>
+        <div class="contact-big">
+          Let's
+          <em>connect ♡</em>
+        </div>
+        <p class="contact-sub">Open to collaborations, feedback, and interesting conversations 🌸 Don't be shy — say hello!</p>
+      </div>
+      <div class="contact-links up">
+        <a href="mailto:ridhima7227@gmail.com" class="contact-link">
+          <div class="contact-link-ico">✉️</div>
+          <div>
+            <div class="contact-link-txt">ridhima7227@gmail.com</div>
+            <div class="contact-link-lbl">Email ♡</div>
+          </div>
+          <span class="contact-link-arr">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ridhima-sharma-b3334b390/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-ico">💼</div>
+          <div>
+            <div class="contact-link-txt">linkedin.com/in/ridhima-sharma-b3334b390</div>
+            <div class="contact-link-lbl">LinkedIn ✨</div>
+          </div>
+          <span class="contact-link-arr">→</span>
+        </a>
+        <a href="https://github.com/Ridhima-sharma09" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-ico">🐙</div>
+          <div>
+            <div class="contact-link-txt">github.com/Ridhima-sharma09</div>
+            <div class="contact-link-lbl">GitHub 🌟</div>
+          </div>
+          <span class="contact-link-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    I’m a 16-year-old student and developer with an insatiable curiosity about the world. When I’m not experimenting with chemistry or lost in philosophical books and quotes, you’ll probably find me sketching realistic portraits or overthinking life’s little mysteries. Powered by coffee, ideas, and occasional chaos, I like to keep learning, creating, and laughing along the way 🌿✨ Thank you for visiting! — Ridhima Sharma
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-sig">Ridhima Sharma</div>
+  <div class="footer-hearts">♡ ✦ ♡ ✦ ♡</div>
+  <div class="footer-note">Powered by coffee, curiosity & occasional chaos 🌿✨ Thank you for visiting!</div>
+</footer>
 
 <script>
-  // Carousel logic for testimonials
-  (function(){
-    const slides = document.getElementById('slides');
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    let idx = 0;
-    const max = slides ? slides.children.length : 0;
-    let autoplay = true;
-    let autoTimer;
+// MAGIC CANVAS
+(function(){
+  var canvas=document.getElementById('magic-canvas');
+  var symbols=['♡','♡','♡','✦','✦','✨','🌸','🌸','💜','🦋','R','i','d','h','i','m','a','✿','❀','~','·','✦','♡','🌙','💫','◇'];
+  var colors=['#c8a8f8','#ffb3d9','#ffe8a0','#a8e8d0','#f0c8e0','#d8c8ff','#ff9ec8','#e8d0ff'];
+  for(var i=0;i<55;i++){
+    var el=document.createElement('span');
+    el.className='spark';
+    el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.cssText='left:'+Math.random()*100+'%;bottom:-5%;font-size:'+(9+Math.random()*13)+'px;color:'+colors[Math.floor(Math.random()*colors.length)]+';font-family:'+(Math.random()>.5?'Fraunces,serif':'DM Sans,sans-serif')+';font-style:'+(Math.random()>.5?'italic':'normal')+';animation-duration:'+(14+Math.random()*22)+'s;animation-delay:'+(Math.random()*20)+'s';
+    canvas.appendChild(el);
+  }
+})();
 
-    function go(i){
-      idx = (i + max) % max;
-      if (slides) slides.style.transform = 'translateX(' + (-idx * 100) + '%)';
-      dots.forEach(d=>d.classList.remove('active'));
-      if (dots[idx]) dots[idx].classList.add('active');
-    }
+// CURSOR (desktop)
+var cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+var mx=0,my=0,rx=0,ry=0;
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  (function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+  document.querySelectorAll('a,button,.proj-head').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.style.width='22px';cur.style.height='22px'});
+    el.addEventListener('mouseleave',function(){cur.style.width='14px';cur.style.height='14px'});
+  });
+}
 
-    if (dots.length){
-      dots.forEach(d=>d.addEventListener('click', ()=>{
-        const i = parseInt(d.dataset.index);
-        go(i);
-        autoplay = false;
-        clearInterval(autoTimer);
-      }));
-    }
+// ACCORDION
+function toggleProj(head){
+  var body=head.nextElementSibling;
+  var arr=head.querySelector('.proj-arr');
+  var isOpen=body.classList.contains('open');
+  document.querySelectorAll('.proj-body').forEach(function(b){b.classList.remove('open')});
+  document.querySelectorAll('.proj-arr').forEach(function(a){a.textContent='↓'});
+  if(!isOpen){body.classList.add('open');arr.textContent='↑'}
+}
 
-    function startAuto(){
-      autoTimer = setInterval(()=>{ if(autoplay) go(idx+1); }, 4200);
-    }
-    startAuto();
-    // CTA hooks
-const ctaGit = document.getElementById('ctaGit');
-if(ctaGit) ctaGit.addEventListener('click', () => {
-  window.open('https://github.com/ridhima-sharma09','_blank');
-});
+// SCROLL REVEAL
+var ups=document.querySelectorAll('.up');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target)}});
+},{threshold:0.07});
+ups.forEach(function(el){obs.observe(el)});
 
-const downloadCV = document.getElementById('downloadCV');
-if(downloadCV) downloadCV.addEventListener('click', () => {
-  alert('Will be provided soon!');
-});
-
-const contactMe = document.getElementById('contactMe');
-if(contactMe) contactMe.addEventListener('click', () => {
-  window.location.href = 'mailto:ridhima7227@gmail.com';
-});
-
-// Testimonial popup
-const shareBtn = document.getElementById('shareBtn');
-const testimonialPopup = document.getElementById('testimonialPopup');
-const closePopup = document.getElementById('closePopup');
-
-if(shareBtn) shareBtn.addEventListener('click', () => {
-  testimonialPopup.style.display = 'flex';
-});
-
-if(closePopup) closePopup.addEventListener('click', () => {
-  testimonialPopup.style.display = 'none';
-});
-
-    
-
-  })();
+// POPUP
+var popup=document.getElementById('testimonialPopup');
+document.getElementById('shareBtn').addEventListener('click',function(){popup.style.display='flex'});
+document.getElementById('closePopup').addEventListener('click',function(){popup.style.display='none'});
+popup.addEventListener('click',function(e){if(e.target===popup)popup.style.display='none'});
 </script>
-
 </body>
 </html>
